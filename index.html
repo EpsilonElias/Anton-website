@@ -4,45 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Anton</title>
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #ffffff; /* White background */
-        color: #333; /* Dark text color */
-        overflow: hidden;
-    }
-    header {
-        background-color: #ff6347; /* Red background */
-        color: #fff;
-        padding: 10px 0;
-        text-align: center;
-    }
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #ffffff; /* White container background */
-        border-radius: 10px; /* Rounded corners */
-        box-shadow: 0 0 10px #888; /* Soft shadow */
-    }
-    #app {
-        position: relative; /* Ensure stacking context for child elements */
-        overflow: hidden;  /* Ensure cursor does not overflow */
-    }
-    #app canvas {
-        display: block;
-        position: fixed; /* Position to cover the viewport */
-        z-index: 9999; /* Ensure it's on top */
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-</style>
-    
-    <link rel="stylesheet" href="style.css"> <!-- Ensure this file exists and contains relevant styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+            color: #333; /* Dark text color */
+        }
+
+        header {
+            background-color: #ff6347; /* Red background */
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff; /* White container background */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 10px #888; /* Soft shadow */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #app {
+            position: relative; /* Ensure stacking context for child elements */
+            overflow: hidden;  /* Ensure cursor does not overflow */
+        }
+
+        #app canvas {
+            display: block;
+            position: fixed; /* Position to cover the viewport */
+            z-index: 100; /* Lower z-index */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Make sure it doesn't interfere with clicking */
+        }
+    </style>
     <script type="module">
         import { neonCursor } from 'https://unpkg.com/threejs-toys@0.0.2/build/threejs-toys.module.cdn.min.js';
 
@@ -58,11 +64,10 @@
                 sleepRadiusX: 100,
                 sleepRadiusY: 100,
                 sleepTimeCoefX: 0.0025,
-                sleepTimeCoefY: 0.0025 // Ensure this matches the library's parameter
+                sleepTimeCoefY: 0.0025
             });
         });
     </script>
-
 </head>
 <body>
     <header>
@@ -72,8 +77,5 @@
         <p>I am a licensed and practicing therapist in the Los Angeles area.</p>
         <p>My goals are to help those with mental health issues.</p>
     </div>
-     <script>
-        
-    </script>
 </body>
 </html>
