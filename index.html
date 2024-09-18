@@ -11,6 +11,11 @@
             padding: 0;
             background-color: #ffffff; /* White background */
             color: #333; /* Dark text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Make sure there's no overflow */
         }
 
         header {
@@ -18,35 +23,34 @@
             color: #fff;
             padding: 10px 0;
             text-align: center;
+            width: 100%;
         }
 
         .container {
+            width: 100%;
             max-width: 800px;
-            margin: 0 auto;
             padding: 20px;
             background-color: #ffffff; /* White container background */
             border-radius: 10px; /* Rounded corners */
             box-shadow: 0 0 10px #888; /* Soft shadow */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            position: relative;
+            z-index: 1; /* Ensure it's above the canvas */
         }
 
         #app {
+            width: 100%;
             position: relative; /* Ensure stacking context for child elements */
-            overflow: hidden;  /* Ensure cursor does not overflow */
         }
 
         #app canvas {
             display: block;
-            position: fixed; /* Position to cover the viewport */
-            z-index: 100; /* Lower z-index */
+            position: fixed; /* Fixed to viewport */
+            z-index: 0; /* Make sure it is behind everything */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* Make sure it doesn't interfere with clicking */
+            pointer-events: none; /* No interaction */
         }
     </style>
     <script type="module">
@@ -73,9 +77,11 @@
     <header>
         <h1>Doctor Anton</h1>
     </header>
-    <div id="app" class="container">
-        <p>I am a licensed and practicing therapist in the Los Angeles area.</p>
-        <p>My goals are to help those with mental health issues.</p>
+    <div id="app">
+        <div class="container">
+            <p>I am a licensed and practicing therapist in the Los Angeles area.</p>
+            <p>My goals are to help those with mental health issues.</p>
+        </div>
     </div>
 </body>
 </html>
