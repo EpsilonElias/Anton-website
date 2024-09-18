@@ -16,6 +16,7 @@
             align-items: center;
             min-height: 100vh;
             overflow: hidden; /* Make sure there's no overflow */
+            position: relative;
         }
 
         header {
@@ -24,6 +25,7 @@
             padding: 10px 0;
             text-align: center;
             width: 100%;
+            z-index: 1; /* Make sure it's above the canvas */
         }
 
         .container {
@@ -37,19 +39,14 @@
             z-index: 1; /* Ensure it's above the canvas */
         }
 
-        #app {
-            width: 100%;
-            position: relative; /* Ensure stacking context for child elements */
-        }
-
         #app canvas {
-            display: block;
-            position: fixed; /* Fixed to viewport */
-            z-index: 0; /* Make sure it is behind everything */
+            position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw; /* Full width */
+            height: 100vh; /* Full height */
+            z-index: 0; /* Make sure it is behind everything */
+            background: transparent; /* Remove any dark background */
             pointer-events: none; /* No interaction */
         }
     </style>
@@ -58,7 +55,7 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             neonCursor({
-                el: document.getElementById('app'),
+                el: document.body, /* Apply cursor effect to the whole body */
                 shaderPoints: 16,
                 curvePoints: 80,
                 curveLerp: 0.5,
