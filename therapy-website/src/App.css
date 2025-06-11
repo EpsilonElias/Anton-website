@@ -1,7 +1,7 @@
 .App {
   text-align: center;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -12,7 +12,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+*/
 .App-header {
   background-color: #ffffff;
   min-height: 100vh;
@@ -27,7 +27,7 @@
 .App-link {
   color: #61dafb;
 }
-
+/*
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,9 +35,15 @@
   to {
     transform: rotate(360deg);
   }
-}
+}*/
 
-/* ...existing code... */
+/*=============================================================================== */
+
+
+/* Side bar styles  */
+
+
+/*=============================================================================== */
 
 .sidebar {
   width: 60px; /* collapsed width */
@@ -86,8 +92,115 @@
 .sidebar:hover button::before {
   content: '';
 }
-/* Add padding to main content so it's not hidden behind sidebar */
 .main-content {
-  margin-left: 200px;
-  padding: 20px;
+  max-width: 900px;      /* or any width you prefer */
+  margin: 0 auto;        /* centers the content horizontally */
+  padding: 40px 20px;
+  transition: padding-left 0.3s;
 }
+
+/* Optional: Add left padding so content isn't hidden under the sidebar */
+@media (min-width: 601px) {
+  .main-content {
+    padding-left: 80px; /* enough to clear the collapsed sidebar */
+  }
+}
+
+.sidebar:hover ~ .main-content {
+  padding-left: 220px; /* enough to clear the expanded sidebar */
+}
+
+/*=============================================================================== */
+
+
+/* Blocks on the main page styles  */
+
+
+/*=============================================================================== */
+
+.hero-block {
+  background: url('c:\Users\warlo\Desktop\Llama Files\Anton Website\Anton-website\therapy-website\public\boni.jpg') center center/cover no-repeat;
+  background-position: 50% 10%;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  margin-bottom: 48px;
+  padding: 20px 48px;      /* Increase padding for more space inside */
+  min-height: 800px;       /* Set a minimum height */
+  width: 100%;             /* Make it stretch to container width */
+  max-width: 1200px; 
+  display: flex;
+  align-items: flex-start;      
+  justify-content: flex-start;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+}
+
+.block-content {
+  display: flex;
+  align-items: flex-start;   /* Align items to the top */
+  justify-content: flex-start; /* Align items to the left horizontally */
+  gap: 48px;
+}
+
+.block-text {
+  flex: 2;
+}
+
+.block-text h2 {
+  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 18px;
+  background: rgba(255, 0, 0, 0.675); /* semi-transparent dark background */
+  display: inline-block;              /* shrink background to text width */
+  padding: 0.7em 1.2em;
+  border-radius: 12px;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.block-text p {
+  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  color: #000000;
+  font-size: 1.15rem;
+  font-weight: 450;
+  margin-bottom: 12px;
+  background: rgba(207, 240, 181, 0.873); /* semi-transparent dark background */
+  display: inline-block;  
+  margin-top: 0;
+  margin-bottom: 8px;
+  letter-spacing: 0.06em;       
+  word-spacing: 0.15em;
+  border-radius: 12px;
+}
+
+.block-image-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.block-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 6px solid #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .block-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .block-image-wrapper {
+    margin-bottom: 16px;
+  }
+}
+
