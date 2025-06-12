@@ -1,7 +1,9 @@
 /*import logo from './logo.svg';*/
 import './App.css';
 import Sidebar from './Sidebar';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+/*import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';*/
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 // Import your page components (create these files)
 import Home from './pages/Home';
