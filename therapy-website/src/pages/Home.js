@@ -1,7 +1,16 @@
+import boni from '../boni.jpg'; // adjust the path if needed
+
 function Home() {
   return (
-    <header className="App-header hero-block">
-      {/* Your home page content here */}
+    <header
+      className="App-header hero-block"
+      style={{
+        backgroundImage: `url(${boni})`,
+        backgroundPosition: '50% 10%',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
       <div className="block-content">
         <div className="block-text">
           <h2>For a Happier and Secure Future</h2>
