@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Anton-website/static/css/main.14f1c537.css",
-    "main.js": "/Anton-website/static/js/main.aad435ac.js",
+    "main.css": "/Anton-website/static/css/main.c1845f9e.css",
+    "main.js": "/Anton-website/static/js/main.ff9367a6.js",
     "static/js/453.6af2d48e.chunk.js": "/Anton-website/static/js/453.6af2d48e.chunk.js",
     "static/media/boni.jpg": "/Anton-website/static/media/boni.032053dc09259e96ed51.jpg",
     "index.html": "/Anton-website/index.html",
-    "main.14f1c537.css.map": "/Anton-website/static/css/main.14f1c537.css.map",
-    "main.aad435ac.js.map": "/Anton-website/static/js/main.aad435ac.js.map",
+    "main.c1845f9e.css.map": "/Anton-website/static/css/main.c1845f9e.css.map",
+    "main.ff9367a6.js.map": "/Anton-website/static/js/main.ff9367a6.js.map",
     "453.6af2d48e.chunk.js.map": "/Anton-website/static/js/453.6af2d48e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.14f1c537.css",
-    "static/js/main.aad435ac.js"
+    "static/css/main.c1845f9e.css",
+    "static/js/main.ff9367a6.js"
   ]
 }
