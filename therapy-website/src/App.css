@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 /*
 .App-logo {
@@ -27,6 +28,8 @@
 .App-link {
   color: #61dafb;
 }
+
+
 /*
 @keyframes App-logo-spin {
   from {
@@ -36,6 +39,10 @@
     transform: rotate(360deg);
   }
 }*/
+
+
+
+
 
 /*=============================================================================== */
 
@@ -58,6 +65,8 @@
   top: 0;
   overflow-x: hidden;
   transition: width 0.3s;
+  z-index: 10;
+  background: var(--secondary-color, #d32f2f); /* already set */
 }
 .sidebar:hover {
   width: 200px; /* expanded width */
@@ -95,7 +104,7 @@
 .main-content {
   max-width: 900px;      /* or any width you prefer */
   margin: 0 auto;        /* centers the content horizontally */
-  padding: 40px 20px;
+  padding: 0px 0px;
   transition: padding-left 0.3s;
 }
 
@@ -205,3 +214,51 @@
   }
 }
 
+
+
+/*=============================================================================== */
+
+
+/* Parallax stuff and styling   */
+
+
+/*=============================================================================== */
+
+
+.parallax-section {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.fullscreen-section {
+  width: 100vw;
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fixed-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+
+}
+.sticky-image {
+  position: sticky;
+  top: 40px;
+  width: 300px;
+  height: auto;
+}
