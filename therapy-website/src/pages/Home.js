@@ -1,20 +1,20 @@
-import boni from '../boni.jpg';
+import face from '../face.jpg';
 
 function Home() {
   return (
     <>
       {/* Parallax CG image at the top */}
        <div
-      className="parallax-section"
-      style={{
-        backgroundImage: `url(${process.env.PUBLIC_URL}/CG.png), linear-gradient(red, yellow)`,
-        height: "850px",
-        minHeight: "300px",
-        /*width: "100vw",*/
-      }}
-    >
-      <h2 style={{ color: "#fff", textShadow: "0 0 20px #000" }}>Dr. Anton Serzhan Therapy</h2>
-    </div>
+  className="parallax-section"
+  style={{
+    backgroundImage: `url(${process.env.PUBLIC_URL}/CG.png), linear-gradient(red, yellow)`,
+    height: "850px",
+    minHeight: "300px",
+  }}
+>
+  {/* <div className="parallax-corner-text"></div>       this is for the text in the corner top                 */}
+  <h1 className="parallax-title">For a Happier and Secure Future</h1>
+</div>
 
       {/* Blank space */}
       <div style={{ height: "100px" }}></div>
@@ -23,37 +23,85 @@ function Home() {
       <header
         className="App-header hero-block"
         style={{
-          backgroundImage: `url(${boni})`,
-          backgroundPosition: '50% 10%',
+          backgroundImage: `url(${face})`,
+          backgroundPosition: '70% 30%',
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat'
         }}
       >
         <div className="block-content">
-          <div className="block-text">
-            <h2>For a Happier and Secure Future</h2>
-            <p>Everyone deals with challenges in life, its what makes us human. You are not alone in your fight with mental health.</p>
-            <p>Begin your recovery by understanding your mental health using different therapy styles. Book a session now!</p>
-          </div>
+          
         </div>
       </header>
 
       {/* Blank space */}
-      <div style={{ height: "800px" }}></div>
+<div style={{ height: "100px" }}></div>
+<div
+  style={{
+    minHeight: "400px", // or whatever height you want for the white area
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  }}
+>
+  <div className="block-text">
+    
+    <p>Everyone deals with challenges in life, its what makes us human. You are not alone in your fight with mental health.</p>
+    <p>Begin your recovery by understanding your mental health using different therapy styles. Book a session now!</p>
+  </div>
+</div>
 
       {/* Parallax book image at the bottom */}
       <div
         className="parallax-section"
         style={{
-          backgroundImage: `url(${process.env.PUBLIC_URL}/book.png)`,
+          backgroundImage: `url(${process.env.PUBLIC_URL}/forest.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           height: "750px", // Adjust as needed
         }}
       >
-        {/* Optional overlay content */}
-      </div>
+        <div className="office-parallax-text">
+    Learn more about me in the " About " section
+  </div>
+</div>
+      
+      {/* Another parallax section with a different image */}
+      <div
+  className="parallax-section"
+  style={{
+    backgroundImage: `url(${process.env.PUBLIC_URL}/office.jpg)`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    height: "750px",
+  }}
+>
+  <div className="office-parallax-text">
+    Contact me to book a session
+  </div>
+</div>
+      
+      {/* Solid red section with text */}
+      <div
+  className="full-width-section"
+  style={{
+    background: "red",
+    color: "white",
+    minHeight: "300px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+  }}
+>
+  <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Los Angeles</h2>
+  <p style={{ fontSize: "1.3rem", maxWidth: 700, textAlign: "center" }}>
+    I am a licensed Doctor of Psychology
+    </p>
+</div>
     </>
   );
 }
