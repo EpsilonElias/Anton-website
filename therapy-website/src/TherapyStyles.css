@@ -1,0 +1,191 @@
+.therapy-header-section {
+  background: red;
+  color: white;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 48px 20px 24px 20px;
+}
+
+.therapy-header-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+}
+
+.therapy-header-desc {
+  font-size: 1.3rem;
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+}
+
+.carousel3d-wrapper {
+  width: 100%;
+  max-width: 1024px;
+  margin: 200px auto 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 350px;
+  overflow: visible;
+}
+
+.carousel3d-perspective {
+  width: 100%;
+  max-width: 420px;
+  height: 340px;
+  perspective: 1000px;
+  perspective-origin: center center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.carousel3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+  transform-origin: center center;
+}
+
+.carousel3d-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 256px;
+  height: 320px;
+  border-radius: 18px;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+  transition: all 0.7s cubic-bezier(.4,2,.6,1);
+  cursor: pointer;
+  margin-left: -128px;
+  margin-top: -160px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  padding: 24px;
+  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+}
+
+/* Optional debug border */
+/* .carousel3d-card {
+  outline: 1px solid white;
+} */
+
+.carousel-arrow {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  cursor: pointer;
+  margin: 0 16px;
+  transition: background 0.2s;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.carousel-arrow:hover {
+  background: #b71c1c;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 700px) {
+  .carousel3d-wrapper {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+    min-height: 300px;
+    width: 100%;
+    gap: 12px;
+    overflow-x: hidden;
+    padding: 0 12px;
+  }
+
+  .carousel3d-perspective {
+    width: 100%;
+    max-width: 100%;
+    height: 220px;
+    margin: 0 auto;
+    perspective: 800px;
+  }
+
+  .carousel3d-card {
+    width: 90vw;
+    max-width: 340px;
+    height: 180px;
+    font-size: 1rem;
+    margin-left: calc(-45vw); /* centers it */
+    margin-top: -90px; /* centers vertically */
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .carousel-arrows-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 12px;
+    gap: 16px;
+  }
+
+  .carousel-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    margin: 0 8px;
+  }
+
+  .carousel3d-wrapper > .carousel-arrow {
+    display: none;
+  }
+}
+
+
+/* Hide desktop arrows on mobile, show mobile arrows */
+@media (max-width: 700px) {
+  .carousel3d-wrapper > .carousel-arrow {
+    display: none;
+  }
+  .carousel-arrows-mobile {
+    display: flex;
+  }
+}
+@media (min-width: 701px) {
+  .carousel-arrows-mobile {
+    display: none;
+  }
+}
+
+/* Desktop: move arrows further out */
+@media (min-width: 701px) {
+  .carousel-arrow.left {
+    position: absolute;
+    left: -70px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .carousel-arrow.right {
+    position: absolute;
+    right: -70px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

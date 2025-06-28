@@ -8,7 +8,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 
 function App() {
-  const colorGradient = `${process.env.PUBLIC_URL}/CG.png`;
+  
 
   return (
     <Router>

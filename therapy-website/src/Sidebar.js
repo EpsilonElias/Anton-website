@@ -1,13 +1,13 @@
-
-
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
+  const navigate = useNavigate();
   return (
     <nav className="sidebar">
-      <button onClick={() => window.location.href = '/'}>Blank</button>
-      <button onClick={() => window.location.href = '/'}>Therapy Styles</button>
-      <button onClick={() => window.location.href = '/about'}>About</button>
-      <button onClick={() => window.location.href = '/contact'}>Contact</button>
+      <button onClick={() => navigate('/')}>Blank</button>
+      <button onClick={() => navigate('/therapy-styles')}>Therapy Styles</button>
+      <button onClick={() => navigate('/about')}>About</button>
+      <button onClick={() => navigate('/contact')}>Contact</button>
     </nav>
   );
 }
