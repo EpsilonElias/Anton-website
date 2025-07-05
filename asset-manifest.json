@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Anton-website/static/css/main.92782c27.css",
-    "main.js": "/Anton-website/static/js/main.065de80d.js",
+    "main.css": "/Anton-website/static/css/main.3cdd6d45.css",
+    "main.js": "/Anton-website/static/js/main.b4c6bf36.js",
     "static/js/453.6af2d48e.chunk.js": "/Anton-website/static/js/453.6af2d48e.chunk.js",
     "static/media/face.jpg": "/Anton-website/static/media/face.0729d8f9162c462fa068.jpg",
     "index.html": "/Anton-website/index.html",
-    "main.92782c27.css.map": "/Anton-website/static/css/main.92782c27.css.map",
-    "main.065de80d.js.map": "/Anton-website/static/js/main.065de80d.js.map",
+    "main.3cdd6d45.css.map": "/Anton-website/static/css/main.3cdd6d45.css.map",
+    "main.b4c6bf36.js.map": "/Anton-website/static/js/main.b4c6bf36.js.map",
     "453.6af2d48e.chunk.js.map": "/Anton-website/static/js/453.6af2d48e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.92782c27.css",
-    "static/js/main.065de80d.js"
+    "static/css/main.3cdd6d45.css",
+    "static/js/main.b4c6bf36.js"
   ]
 }
