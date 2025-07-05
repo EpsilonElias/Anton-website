@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../TherapyStyles.css";
+import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 
 const therapyStyles = [
   { title: "Cognitive Behavioral Therapy", desc: "CBT helps you manage problems by changing the way you think and behave.", color: "#4F46E5" },
@@ -46,9 +47,11 @@ function TherapyStyles() {
       </div>
 
       <div className="carousel3d-wrapper">
-        {/* Desktop Arrows */}
+        {/* Desktop Left Arrow */}
         {!isMobile && (
-          <button className="carousel-arrow left" onClick={prev}>&lt;</button>
+          <button className="carousel-arrow left" onClick={prev}>
+            <ArrowBigLeftDash size={32} />
+          </button>
         )}
 
         <div className="carousel3d-perspective">
@@ -66,15 +69,22 @@ function TherapyStyles() {
           </div>
         </div>
 
+        {/* Desktop Right Arrow */}
         {!isMobile && (
-          <button className="carousel-arrow right" onClick={next}>&gt;</button>
+          <button className="carousel-arrow right" onClick={next}>
+            <ArrowBigRightDash size={32} />
+          </button>
         )}
 
         {/* Mobile Arrows */}
         {isMobile && (
           <div className="carousel-arrows-mobile">
-            <button className="carousel-arrow left" onClick={prev}>&lt;</button>
-            <button className="carousel-arrow right" onClick={next}>&gt;</button>
+            <button className="carousel-arrow left" onClick={prev}>
+              <ArrowBigLeftDash size={28} />
+            </button>
+            <button className="carousel-arrow right" onClick={next}>
+              <ArrowBigRightDash size={28} />
+            </button>
           </div>
         )}
       </div>

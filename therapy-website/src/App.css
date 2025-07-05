@@ -126,8 +126,23 @@ html, body, #root, .App {
 .sidebar:hover ~ .main-content {
   padding-left: 220px; /* enough to clear the expanded sidebar */
 }
+.sidebar-menu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-bottom: 16px;
+  transition: opacity 0.3s;
+  opacity: 1;
+}
 
-
+.sidebar:hover .sidebar-menu-icon {
+  opacity: 0;
+  pointer-events: none;
+}
+.sidebar-menu-svg {
+  color: #fff; /* Change this to any color you want */
+}
 
 /*=============================================================================== */
 
@@ -164,7 +179,7 @@ html, body, #root, .App {
 }
 
 .block-text h2 {
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   color: #ffffff;
   font-size: 2.2rem;
   font-weight: bold;
@@ -178,7 +193,7 @@ html, body, #root, .App {
 }
 
 .block-text p {
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   color: #000000;
   font-size: 1.15rem;
   font-weight: 450;
@@ -186,7 +201,7 @@ html, body, #root, .App {
   /*background: rgba(239, 7, 7, 0.873);  semi-transparent dark background */
   display: inline-block;  
   margin-top: 0;
-  margin-bottom: 8px;
+  margin-bottom:30px;
   letter-spacing: 0.06em;       
   word-spacing: 0.15em;
   border-radius: 12px;
@@ -278,9 +293,9 @@ html, body, #root, .App {
   color: #fff;
   font-size: 7vw;              /* Responsive: scales with viewport width */
   font-weight: 700;            /* Bold */
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   text-align: center;
-  margin: 0;
+  margin: 1;
   line-height: 1.1;
   letter-spacing: 1px;
   /* Optional: subtle shadow for readability */
@@ -359,16 +374,25 @@ html, body, #root, .App {
 .office-parallax-text {
   color: #fff;
   font-size: 2.5rem;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  font-family: 'Libertinus Math', Arial, Helvetica, sans-serif;
   font-weight: 700;
   text-align: center;
   background: rgba(0,0,0,0.35); /* optional: for readability */
   padding: 24px 40px;
+  max-width: 650px; 
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.12);
   z-index: 3;
 }
-
+/* mobile stuff for parallax */
+@media (max-width: 700px) {
+  .office-parallax-text {
+    font-size: 1.1rem;
+    padding: 8px 5vw;
+    max-width: 75vw;
+    border-radius: 10px;
+  }
+}
 
 /*=============================================================================== */
 
@@ -404,14 +428,14 @@ html, body, #root, .App {
 .about-header-section h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
 }
 
 .about-header-section p {
   font-size: 1.3rem;
   max-width: 700px;
   margin: 0 auto;
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
 }
 
 .about-content-section {
@@ -447,7 +471,7 @@ html, body, #root, .App {
 }
 
 .about-text-content h3 {
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   color: #ffffff;
   font-size: 2.2rem;
   font-weight: bold;
@@ -459,7 +483,7 @@ html, body, #root, .App {
 }
 
 .about-text-content p {
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   color: #000000;
   font-size: 1.15rem;
   font-weight: 450;
@@ -476,7 +500,7 @@ html, body, #root, .App {
 }
 
 .about-approach-section h3 {
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   color: #ffffff;
   font-size: 2.2rem;
   font-weight: bold;
@@ -488,7 +512,7 @@ html, body, #root, .App {
 }
 
 .about-approach-section p {
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   color: #000000;
   font-size: 1.15rem;
   font-weight: 450;
@@ -578,7 +602,7 @@ html, body, #root, .App {
   .block-text {
     text-align: center;
     padding: 0 5vw;
-    max-width: 98vw;
+    max-width: 60vw;
     margin: 0 auto;
   }
   .block-text h2 {
@@ -598,7 +622,7 @@ html, body, #root, .App {
 .about-header-desc {
   margin: 0 auto;
   max-width: 700px;
-  font-family: 'Edu VIC WA NT Hand Pre', cursive, Arial, sans-serif;
+  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
   /* Desktop default */
   font-size: 1.3rem;
   text-align: center;
@@ -609,5 +633,112 @@ html, body, #root, .App {
     font-size: 1rem;
     max-width: 95vw;
     padding: 0 5vw;
+  }
+}
+
+/*=============================================================================== */
+/* Contact page styles  */
+/*=============================================================================== */
+
+/* Contact Form Styles */
+.contact-form {
+  background: rgba(255,255,255,0.85);
+  max-width: 900px;
+  margin: 48px auto 0 auto;
+  padding: 40px 32px 32px 32px;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-form label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #222;
+}
+
+.contact-row {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: #fff;
+  resize: none;
+  font-family: inherit;
+}
+
+.contact-form textarea {
+  min-height: 90px;
+  max-height: 200px;
+}
+
+.contact-submit {
+  margin: 24px auto 0 auto;
+  padding: 14px 48px;
+  background: #fff;
+  color: #d32f2f;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: block;
+}
+
+.contact-submit:hover {
+  background: #d32f2f;
+  color: #fff;
+}
+
+.required {
+  color: #d32f2f;
+  font-size: 0.95rem;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .contact-form {
+    padding: 16px 8vw;
+    max-width: 70vw;
+    margin: 24px auto 0 auto;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    gap: 10px;
+  }
+  .contact-form label {
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: 2px;
+  }
+  .contact-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 1rem;
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+  .contact-submit {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    margin: 16px 0 0 0;
   }
 }

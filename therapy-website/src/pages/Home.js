@@ -47,7 +47,8 @@ function Home() {
 >
   <div className="block-text">
     
-    <p>Everyone deals with challenges in life, its what makes us human. You are not alone in your fight with mental health.</p>
+    <p>How have you been feeling lately? If you have been feeling like something is not right, or that it is time you addressed something that has bothered you for a while, then perhaps we should talk. Whether it trauma, difficulty with mood, low self-esteem, attention, interpersonal conflicts, maladaptive habits, pain management, personality disorders you are always welcomed in. </p>
+    
     <p>Begin your recovery by understanding your mental health using different therapy styles. Book a session now!</p>
   </div>
 </div>
