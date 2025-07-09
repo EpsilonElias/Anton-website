@@ -98,6 +98,13 @@ html, body, #root, .App {
   opacity: 1; /* show text on hover */
 }
 
+.sidebar button:hover {
+  background: #d32f2f;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transform: translateX(4px) scale(1.04);
+}
+
 .sidebar button::before {
   content: '☰'; /* simple icon, replace as needed */
   margin-right: 0.5em;
@@ -391,6 +398,45 @@ html, body, #root, .App {
     padding: 8px 5vw;
     max-width: 75vw;
     border-radius: 10px;
+  }
+}
+
+/* Instagram Button Styles */
+.instagram-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: #d32f2f;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.instagram-btn:hover {
+  background: #d32f2f;
+  color: #fff;
+}
+.instagram-btn:hover svg {
+  color: #fff;
+}
+
+/* Mobile styles for Instagram button */
+@media (max-width: 700px) {
+  .instagram-btn {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    width: 90vw;
+    max-width: 320px;
+    justify-content: center;
   }
 }
 
@@ -742,3 +788,89 @@ html, body, #root, .App {
     margin: 16px 0 0 0;
   }
 }
+
+/*=============================================================================== */
+/* styles for resources page */
+/*=============================================================================== */
+
+
+/*=============================================================================== */
+/* Resources Page Styles */
+/*=============================================================================== */
+
+/* Desktop / Default styles */
+
+.resources-page {
+  padding: 0 16px 24px 16px;
+}
+
+
+.resources-list {
+  max-width: 900px;
+  margin: 40px auto 0 auto;
+  padding: 0 16px;
+}
+
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.resource-download {
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.resource-download:hover {
+  background: #760404;
+}
+
+.resource-title {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+/*=============================================================================== */
+/* Mobile Styles @ max-width 700px */
+/*=============================================================================== */
+@media (max-width: 700px) {
+  
+  
+  .resources-list {
+    padding: 0 8vw;
+    margin-top: 0;
+  }
+
+  .resource-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .resource-download {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .resource-title {
+    font-size: 1rem;
+  }
+}
+.resources-list {
+    padding: 0 8vw;
+    margin-top: 20px; /* Add this to move buttons down */
+  }

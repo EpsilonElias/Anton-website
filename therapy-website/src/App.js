@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import TherapyStyles from './pages/TherapyStyles';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Resources from './pages/Resources';
+
 
 function App() {
   
@@ -20,6 +22,7 @@ function App() {
               <Route path="/therapy-styles" element={<TherapyStyles />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/resources" element={<Resources />} />
             </Routes>
           </div>
         </div>

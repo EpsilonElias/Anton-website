@@ -1,4 +1,5 @@
 import face from '../face.jpg';
+import { Instagram } from 'lucide-react';
 
 function Home() {
   return (
@@ -99,9 +100,14 @@ function Home() {
   }}
 >
   <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Los Angeles</h2>
-  <p style={{ fontSize: "1.3rem", maxWidth: 700, textAlign: "center" }}>
-    I am a licensed Doctor of Psychology
-    </p>
+<a
+  href="https://www.instagram.com/psych.center2020/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="instagram-btn"
+>
+  <Instagram size={24} />
+</a>
 </div>
     </>
   );
