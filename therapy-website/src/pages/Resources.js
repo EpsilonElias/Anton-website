@@ -5,12 +5,18 @@ import acceptancePDF from '../assets/pdfs/Acceptance_of_self_and_partner_2.pdf';
 import assertivePDF from '../assets/pdfs/assertive_communication.pdf';
 import horsemenPDF from '../assets/pdfs/four_horsemen.pdf';
 import dbtPDF from '../assets/pdfs/DBT_distress_tolerance_skills.pdf';
+import softPDF from '../assets/pdfs/soft_startups.pdf';
+import relationshipPDF from '../assets/pdfs/relationship_check_in.pdf';
+import lettingPDF from '../assets/pdfs/letting_go_of_resentment_worksheet.pdf';
 
 const resources = [
   { name: "Acceptance of Self and Partner", file: acceptancePDF },
   { name: "Assertive Communication", file: assertivePDF },
   { name: "Four Horsemen", file: horsemenPDF },
-  { name: "DBT Distress Tolerance Skills", file: dbtPDF }
+  { name: "DBT Distress Tolerance Skills", file: dbtPDF },
+  { name: "Soft Startups", file: softPDF },
+  { name: "relationship check-in", file: relationshipPDF },
+  { name: "letting go of resentment worksheet", file: lettingPDF }
 ];
 
 function Resources() {

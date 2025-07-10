@@ -61,7 +61,8 @@ html, body, #root, .App {
 .sidebar {
   width: 40px; /* collapsed width */
   height: 100vh;
-  background: var(--secondary-color, #d32f2f);
+  background: #ff1e00; /* pastel coral */
+  /* background: linear-gradient(to bottom, #FA897B, #FFDD94); */
   display: flex;
   flex-direction: column;
   padding: 20px 0;
@@ -72,8 +73,8 @@ html, body, #root, .App {
   overflow-x: hidden;
   transition: width 0.3s;
   z-index: 10;
-  background: var(--secondary-color, #d32f2f); /* already set */
 }
+
 .sidebar:hover {
   width: 200px; /* expanded width */
   padding: 20px;
@@ -434,7 +435,7 @@ html, body, #root, .App {
     padding: 10px 12px;
     font-size: 1rem;
     border-radius: 6px;
-    width: 90vw;
+    width: 5vw;
     max-width: 320px;
     justify-content: center;
   }
