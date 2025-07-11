@@ -2,18 +2,6 @@
   text-align: center;
   
 }
-/*
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-*/
 .App-header {
   background-color: #ffffff;
   min-height: 100vh;
@@ -24,11 +12,9 @@
   font-size: calc(10px + 2vmin);
   color: rgb(0, 0, 0);
 }
-
 .App-link {
   color: #61dafb;
 }
-
 html, body, #root, .App {
   margin: 0;
   padding: 0;
@@ -36,18 +22,6 @@ html, body, #root, .App {
   width: 100vw;
   overflow-x: hidden;
 }
-/*
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}*/
-
-
-
 
 
 /*=============================================================================== */
@@ -61,7 +35,7 @@ html, body, #root, .App {
 .sidebar {
   width: 40px; /* collapsed width */
   height: 100vh;
-  background: #ff1e00; /* pastel coral */
+  background: linear-gradient(to bottom, rgb(244, 184, 149), rgb(243, 214, 154));
   /* background: linear-gradient(to bottom, #FA897B, #FFDD94); */
   display: flex;
   flex-direction: column;
@@ -100,7 +74,7 @@ html, body, #root, .App {
 }
 
 .sidebar button:hover {
-  background: #d32f2f;
+  background: linear-gradient(to bottom, rgb(244, 162, 149), rgb(243, 190, 154));
   color: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   transform: translateX(4px) scale(1.04);
@@ -151,13 +125,18 @@ html, body, #root, .App {
 .sidebar-menu-svg {
   color: #fff; /* Change this to any color you want */
 }
+/*=============================================================================== */
+
+
+/* HOME.js */
+
 
 /*=============================================================================== */
 
 
-/* Blocks on the main page styles  */
 
-
+/*=============================================================================== */
+/* HERO BLOCK STYLES */
 /*=============================================================================== */
 
 .hero-block {
@@ -234,7 +213,7 @@ html, body, #root, .App {
   z-index: 2;
 }
 
-/* Responsive adjustments */
+/* Hero Block Responsive Adjustments */
 @media (max-width: 900px) {
   .block-content {
     flex-direction: column;
@@ -246,27 +225,10 @@ html, body, #root, .App {
 }
 
 @media (max-width: 900px) {
-  .parallax-title {
-    font-size: 2rem;
-    padding: 0 10vw;
-  }
-  .office-parallax-text {
-    font-size: 1.2rem;
-    padding: 12px 5vw;
-  }
-}
-
-/* Responsive hero block and parallax sections */
-@media (max-width: 900px) {
   .hero-block {
     padding: 10px 5vw;
     min-height: 400px;
     max-width: 98vw;
-    font-size: 1rem;
-  }
-  .parallax-section {
-    height: 250px !important;
-    min-height: 120px !important;
     font-size: 1rem;
   }
   .block-content {
@@ -280,21 +242,8 @@ html, body, #root, .App {
   }
 }
 
-@media (max-width: 900px) {
-  .parallax-section {
-    background-attachment: scroll !important;
-    left: 0;
-    margin-left: 0;
-    margin-right: 0;
-    width: 100vw;
-  }
-}
 /*=============================================================================== */
-
-
-/* Parallax stuff and styling   */
-
-
+/* PARALLAX STYLES */
 /*=============================================================================== */
 
 .parallax-title {
@@ -317,6 +266,7 @@ html, body, #root, .App {
   justify-content: center;
   height: 100%;
 }
+
 .parallax-corner-text {
   position: absolute;
   top: 32px;
@@ -332,6 +282,7 @@ html, body, #root, .App {
   z-index: 3;
   letter-spacing: 0.5px;
 }
+
 .parallax-section {
   position: relative;
   left: 50%;
@@ -348,6 +299,7 @@ html, body, #root, .App {
   justify-content: center;
   box-sizing: border-box;
 }
+
 .fullscreen-section {
   width: 100vw;
   min-height: 100vh;
@@ -356,19 +308,21 @@ html, body, #root, .App {
   align-items: center;
   justify-content: center;
 }
+
 .fixed-bg {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: -1;
-
 }
+
 .sticky-image {
   position: sticky;
   top: 40px;
   width: 300px;
   height: auto;
 }
+
 .full-width-section {
   position: relative;
   left: 50%;
@@ -392,7 +346,32 @@ html, body, #root, .App {
   box-shadow: 0 4px 24px rgba(0,0,0,0.12);
   z-index: 3;
 }
-/* mobile stuff for parallax */
+
+/* Parallax Responsive Adjustments */
+@media (max-width: 900px) {
+  .parallax-title {
+    font-size: 2rem;
+    padding: 0 10vw;
+  }
+  .office-parallax-text {
+    font-size: 1.2rem;
+    padding: 12px 5vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .parallax-section {
+    height: 250px !important;
+    min-height: 120px !important;
+    font-size: 1rem;
+    background-attachment: scroll !important;
+    left: 0;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100vw;
+  }
+}
+
 @media (max-width: 700px) {
   .office-parallax-text {
     font-size: 1.1rem;
@@ -402,13 +381,20 @@ html, body, #root, .App {
   }
 }
 
-/* Instagram Button Styles */
+/*=============================================================================== */
+
+
+/* Instagram Button Styles in the HOME.js  */
+
+
+/*=============================================================================== */
+
 .instagram-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #fff;
-  color: #d32f2f;
+  background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
+  color: #ffffff;
   border: none;
   border-radius: 8px;
   padding: 12px 14px;
@@ -422,7 +408,7 @@ html, body, #root, .App {
 }
 
 .instagram-btn:hover {
-  background: #d32f2f;
+  background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
   color: #fff;
 }
 .instagram-btn:hover svg {
@@ -449,8 +435,6 @@ html, body, #root, .App {
 
 /*=============================================================================== */
 
-/* About page styles - UPDATED */
-/* About Page Specific Styles */
 .about-container {
   margin-left: 40px; /* Account for collapsed sidebar */
   transition: margin-left 0.3s;
@@ -746,7 +730,7 @@ html, body, #root, .App {
 }
 
 .contact-submit:hover {
-  background: #d32f2f;
+  background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
   color: #fff;
 }
 
@@ -795,10 +779,6 @@ html, body, #root, .App {
 /*=============================================================================== */
 
 
-/*=============================================================================== */
-/* Resources Page Styles */
-/*=============================================================================== */
-
 /* Desktop / Default styles */
 
 .resources-page {
@@ -820,7 +800,7 @@ html, body, #root, .App {
 }
 
 .resource-download {
-  background: #d32f2f;
+  background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -835,7 +815,7 @@ html, body, #root, .App {
 }
 
 .resource-download:hover {
-  background: #760404;
+  background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
 }
 
 .resource-title {
@@ -843,9 +823,8 @@ html, body, #root, .App {
   color: #222;
 }
 
-/*=============================================================================== */
 /* Mobile Styles @ max-width 700px */
-/*=============================================================================== */
+
 @media (max-width: 700px) {
   
   

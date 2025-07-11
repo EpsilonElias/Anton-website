@@ -7,7 +7,7 @@ function About() {
       <div
         className="full-width-section"
         style={{
-          background: "rgb(255, 0, 0)",
+          background: "linear-gradient(to bottom,rgb(244, 184, 149),rgb(243, 214, 154))",
           color: "white",
           minHeight: "200px",
           display: "flex",

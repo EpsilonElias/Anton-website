@@ -3,12 +3,14 @@ import "../TherapyStyles.css";
 import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 
 const therapyStyles = [
-  { title: "Cognitive Behavioral Therapy", desc: "CBT helps you manage problems by changing the way you think and behave.", color: "#4F46E5" },
-  { title: "Psychodynamic Therapy", desc: "Focuses on unconscious processes as they are manifested in a person's present behavior.", color: "#059669" },
-  { title: "Humanistic Therapy", desc: "Emphasizes people's capacity to make rational choices and develop to their maximum potential.", color: "#7C3AED" },
-  { title: "Gestalt Therapy", desc: "Focuses on the present moment and personal responsibility.", color: "#DC2626" },
-  { title: "Existential Therapy", desc: "Centers on free will, self-determination, and the search for meaning.", color: "#D97706" },
+  { title: "Cognitive Behavioral Therapy", desc: "CBT helps you manage problems by changing the way you think and behave.", color: "#FFB6C1" }, // Light Coral
+  { title: "Psychodynamic Therapy", desc: "Focuses on unconscious processes as they are manifested in a person's present behavior.", color: "#77DDC1" }, // Muted Teal
+  { title: "Humanistic Therapy", desc: "Emphasizes people's capacity to make rational choices and develop to their maximum potential.", color: "#9EEFE7" }, // Aqua Mint
+  { title: "Gestalt Therapy", desc: "Focuses on the present moment and personal responsibility.", color: "#FFCBA4" }, // Apricot
+  { title: "Existential Therapy", desc: "Centers on free will, self-determination, and the search for meaning.", color: "#F9C97D" }, // Honey Yellow
 ];
+
+
 
 function TherapyStyles() {
   const [current, setCurrent] = useState(0);

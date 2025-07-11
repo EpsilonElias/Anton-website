@@ -90,7 +90,7 @@ function Home() {
       <div
   className="full-width-section"
   style={{
-    background: "red",
+    background: "linear-gradient(to bottom,rgb(244, 184, 149),rgb(243, 214, 154))",
     color: "white",
     minHeight: "300px",
     display: "flex",

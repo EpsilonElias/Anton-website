@@ -1,5 +1,5 @@
 .therapy-header-section {
-  background: red;
+  background: linear-gradient(to bottom, rgb(244, 184, 149), rgb(243, 214, 154));
   color: white;
   min-height: 200px;
   display: flex;
@@ -33,6 +33,7 @@
   position: relative;
   min-height: 350px;
   overflow: visible;
+  padding-bottom: 250px;
 }
 
 .carousel3d-perspective {
@@ -85,7 +86,7 @@
 } */
 
 .carousel-arrow {
-  background: #d32f2f;
+  background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
   color: #fff;
   border: none;
   border-radius: 50%;
@@ -101,7 +102,7 @@
   justify-content: center;
 }
 .carousel-arrow:hover {
-  background: #b71c1c;
+  background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
 }
 
 /* Responsive styles for mobile */
@@ -189,8 +190,6 @@
     transform: translateY(-50%);
   }
 }
-
-
 
 /* mobile adaption for the top text */
 @media (max-width: 700px) {
