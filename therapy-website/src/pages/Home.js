@@ -100,6 +100,7 @@ function Home() {
   }}
 >
   <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Los Angeles</h2>
+  {/*
 <a
   href="https://www.instagram.com/psych.center2020/"
   target="_blank"
@@ -107,7 +108,7 @@ function Home() {
   className="instagram-btn"
 >
   <Instagram size={24} />
-</a>
+</a> */}
 </div>
     </>
   );

@@ -384,14 +384,15 @@ html, body, #root, .App {
 /*=============================================================================== */
 
 
-/* Instagram Button Styles in the HOME.js  */
+/* Instagram Button Styles in the sidebar  */
 
 
 /*=============================================================================== */
 
-.instagram-btn {
+.sidebar-instagram {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
   color: #ffffff;
@@ -404,28 +405,133 @@ html, body, #root, .App {
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   transition: background 0.2s, color 0.2s;
   cursor: pointer;
-  margin-top: 12px;
+
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 80px; /* Distance from bottom */
+  margin-top: 200px; 
+
+
+  
+  width: fit-content; /* Only as wide as needed */
 }
 
-.instagram-btn:hover {
+.sidebar-instagram:hover {
   background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
   color: #fff;
 }
-.instagram-btn:hover svg {
+
+.sidebar-instagram:hover svg {
   color: #fff;
 }
 
-/* Mobile styles for Instagram button */
+.sidebar-instagram {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.sidebar:hover .sidebar-instagram {
+  opacity: 1;
+}
+/* Mobile styles for sidebar Instagram button */
 @media (max-width: 700px) {
-  .instagram-btn {
+  .sidebar-instagram {
     padding: 10px 12px;
     font-size: 1rem;
     border-radius: 6px;
-    width: 5vw;
-    max-width: 320px;
-    justify-content: center;
+    margin-bottom: 15px;
+    width: auto;
+    min-width: 48px; /* Minimum touch target size */
   }
 }
+
+
+/*=============================================================================== */
+
+
+/* linkedin stuff  */
+
+
+/*=============================================================================== */
+.linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s, opacity 0.3s;
+  cursor: pointer;
+
+  /* Proper positioning (not nested!) */
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+  margin-top: 12px;
+
+  width: fit-content;
+  opacity: 0;
+}
+
+
+.linkedin-btn:hover {
+  background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
+  color: #fff;
+}
+
+.sidebar:hover .linkedin-btn {
+  opacity: 1;
+}
+
+/* Mobile styles for sidebar LinkedIn button */
+@media (max-width: 700px) {
+  .linkedin-btn {
+    padding: 10px 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    width: auto;
+    min-width: 48px;
+  }
+}
+
+/*=============================================================================== */
+
+
+/* insta and linkdin combined */
+
+
+/*=============================================================================== */
+
+.sidebar-social-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  margin-bottom: 40px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar:hover .sidebar-social-row {
+  opacity: 1;
+}
+
+/* Optional: remove conflicting margins inside buttons */
+.sidebar-instagram,
+.linkedin-btn {
+  margin: 0;
+}
+
 
 /*=============================================================================== */
 
