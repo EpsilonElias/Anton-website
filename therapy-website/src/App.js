@@ -7,6 +7,7 @@ import TherapyStyles from './pages/TherapyStyles';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Resources from './pages/Resources';
+import Blogs from './pages/Blogs';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/resources" element={<Resources />} />
+              <Route path="/blogs" element={<Blogs />} />
             </Routes>
           </div>
         </div>

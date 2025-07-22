@@ -15,6 +15,7 @@ function Sidebar() {
       <button onClick={() => navigate('/about')}>About</button>
       <button onClick={() => navigate('/contact')}>Contact</button>
       <button onClick={() => navigate('/resources')}>Resources</button>
+      <button onClick={() => navigate('/Blogs')}>Blog</button>
 
       {/* Social buttons at bottom */}
       <div className="sidebar-social-row">

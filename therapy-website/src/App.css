@@ -532,6 +532,11 @@ html, body, #root, .App {
   margin: 0;
 }
 
+@media (max-width: 700px) {
+  .sidebar-social-row {
+    margin-bottom: 100px; /* even higher */
+  }
+}
 
 /*=============================================================================== */
 
@@ -906,27 +911,68 @@ html, body, #root, .App {
 }
 
 .resource-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
   color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 10px 16px;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 1.2rem;
   font-weight: bold;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s;
   cursor: pointer;
 }
 
 .resource-download:hover {
   background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
+  color: #fff;
 }
 
 .resource-title {
   font-size: 1.1rem;
   color: #222;
+}
+
+.resource-search-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.resource-search-btn:hover {
+  background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
+  color: #fff;
+}
+
+
+.resources-list {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.resources-list.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* Mobile Styles @ max-width 700px */
@@ -955,7 +1001,29 @@ html, body, #root, .App {
   .resource-title {
     font-size: 1rem;
   }
+
+  .resources-search-form {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    margin: 16px 0;
+    width: 100%;
+    padding: 0 2vw;
+  }
+  .resources-search-form input[type="text"] {
+    width: 50vw !important;
+    min-width: 0;
+    font-size: 1rem;
+    padding: 10px 8px;
+  }
+  .resource-search-btn {
+    padding: 10px 10px;
+    font-size: 1rem;
+    min-width: 60px;
+  }
 }
+
+
 .resources-list {
     padding: 0 8vw;
     margin-top: 20px; /* Add this to move buttons down */
