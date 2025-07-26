@@ -1,5 +1,5 @@
 .therapy-header-section {
-  background: linear-gradient(to bottom, rgb(244, 184, 149), rgb(243, 214, 154));
+    background: linear-gradient(to bottom, rgb(244, 170, 149),rgb(244, 175, 149), rgb(246, 180, 149), rgb(246, 185, 149));
   color: white;
   min-height: 200px;
   display: flex;
@@ -13,14 +13,14 @@
 .therapy-header-section h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .therapy-header-desc {
   font-size: 1.3rem;
   max-width: 700px;
   margin: 0 auto;
-  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .carousel3d-wrapper {
@@ -34,6 +34,7 @@
   min-height: 350px;
   overflow: visible;
   padding-bottom: 250px;
+  
 }
 
 .carousel3d-perspective {
@@ -55,6 +56,7 @@
   transform-style: preserve-3d;
   transition: transform 0.7s cubic-bezier(.4,2,.6,1);
   transform-origin: center center;
+  
 }
 
 .carousel3d-card {
@@ -73,17 +75,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   color: #fff;
   text-align: center;
   padding: 24px;
-  font-family: 'Libertinus Math', cursive, Arial, sans-serif;
+  font-family: 'Quicksand', sans-serif;
+  justify-content: flex-start;
+  padding-top: 24px; 
 }
 
-/* Optional debug border */
-/* .carousel3d-card {
-  outline: 1px solid white;
-} */
+
 
 .carousel-arrow {
   background: linear-gradient(to bottom, rgb(245, 161, 112), rgb(241, 189, 85));
@@ -104,8 +104,17 @@
 .carousel-arrow:hover {
   background: linear-gradient(to bottom, rgb(244, 176, 104), rgb(246, 148, 126));
 }
-
+.therapy-header-section h2,
+.therapy-header-desc,
+.carousel3d-card h3,
+.carousel3d-card p {
+  color: white;
+}
+.carousel3d-card h3 {
+  font-family: 'Quicksand', sans-serif; /* or your desired font */
+}
 /* Responsive styles for mobile */
+/* Hide desktop arrows on mobile, show mobile arrows */
 @media (max-width: 700px) {
   .carousel3d-wrapper {
     flex-direction: column;
@@ -116,6 +125,8 @@
     gap: 12px;
     overflow-x: hidden;
     padding: 0 12px;
+    padding-bottom: 340px; 
+    padding-top: 40px;
   }
 
   .carousel3d-perspective {
@@ -129,12 +140,13 @@
   .carousel3d-card {
     width: 60vw;
     max-width: 340px;
-    height: 180px;
+    height: 380px;
     font-size: 1rem;
     margin-left: calc(-30vw); /* centers it */
     margin-top: -90px; /* centers vertically */
-    padding: 12px;
+    padding: 18px;
     box-sizing: border-box;
+    word-break: break-word;
   }
 
   .carousel-arrows-mobile {
@@ -156,43 +168,6 @@
   .carousel3d-wrapper > .carousel-arrow {
     display: none;
   }
-}
-
-
-/* Hide desktop arrows on mobile, show mobile arrows */
-@media (max-width: 700px) {
-  .carousel3d-wrapper > .carousel-arrow {
-    display: none;
-  }
-  .carousel-arrows-mobile {
-    display: flex;
-  }
-}
-@media (min-width: 701px) {
-  .carousel-arrows-mobile {
-    display: none;
-  }
-}
-
-/* Desktop: move arrows further out */
-@media (min-width: 701px) {
-  .carousel-arrow.left {
-    position: absolute;
-    left: -70px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .carousel-arrow.right {
-    position: absolute;
-    right: -70px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-
-/* mobile adaption for the top text */
-@media (max-width: 700px) {
   .therapy-header-section {
     padding: 32px 8px 16px 8px;
     min-height: 120px;
@@ -206,4 +181,41 @@
     max-width: 75vw;
     padding: 0 2vw;
   }
+  .carousel3d-wrapper > .carousel-arrow {
+    display: none;
+  }
+  .carousel-arrows-mobile {
+    display: flex;
+  }
 }
+
+
+
+
+
+
+/* Desktop: move arrows further out */
+@media (min-width: 701px) {
+  .carousel-arrow.left {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .carousel-arrow.right {
+    position: absolute;
+    right: -70px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .carousel3d-wrapper {
+  
+  margin-left: -40px;
+}
+.carousel-arrows-mobile {
+    display: none;
+  }
+}
+
+

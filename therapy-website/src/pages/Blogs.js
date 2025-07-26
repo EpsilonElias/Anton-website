@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -42,14 +44,17 @@ const BlogList = () => {
 
   return (
     <div className="blog-container">
-      <h1>Blog Posts</h1>
       <div className="blog-posts">
         {posts.map((post) => (
-          <article key={post.id} className="blog-post">
+          <article
+            key={post.id}
+            className="blog-post"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate(`/blogs/${post.id}`)}
+          >
             <h2>{post.title}</h2>
             {post.excerpt && <p className="blog-excerpt">{post.excerpt}</p>}
             <div className="blog-content">
-              {/* Rich text content - you might need to parse this */}
               {post.content && (
                 <div dangerouslySetInnerHTML={{ __html: post.content }} />
               )}
@@ -73,7 +78,7 @@ function Blogs() {
       <div
         className="full-width-section"
         style={{
-          background: "linear-gradient(to bottom,rgb(244, 184, 149),rgb(243, 214, 154))",
+          background: "linear-gradient(to bottom, rgb(244, 170, 149),rgb(244, 175, 149), rgb(246, 180, 149), rgb(246, 185, 149))",
           color: "white",
           minHeight: "200px",
           display: "flex",
