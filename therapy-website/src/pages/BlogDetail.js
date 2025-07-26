@@ -11,20 +11,20 @@ function BlogDetail() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const response = await fetch(`${API_BASE}/api/posts`);
-        if (!response.ok) throw new Error("Failed to fetch blog post");
-        const data = await response.json();
-        setPost(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPost();
-  }, [id]);
+  const fetchPost = async () => {
+    try {
+      const response = await fetch(`${API_BASE}/api/posts/${id}`);
+      if (!response.ok) throw new Error("Failed to fetch blog post");
+      const data = await response.json();
+      setPost(data.doc); // <-- note .doc
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchPost();
+}, [id]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
