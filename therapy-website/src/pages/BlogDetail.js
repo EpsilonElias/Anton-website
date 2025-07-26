@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Undo2 } from "lucide-react";
+import { API_BASE } from '../api';
 
 function BlogDetail() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ function BlogDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+        const response = await fetch(`${API_BASE}/api/posts`);
         if (!response.ok) throw new Error("Failed to fetch blog post");
         const data = await response.json();
         setPost(data);

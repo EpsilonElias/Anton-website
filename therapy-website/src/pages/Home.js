@@ -3,25 +3,31 @@ import { Instagram } from 'lucide-react';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 
+
 function Home() {
   const [latestBlog, setLatestBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchLatestBlog = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1');
-        const data = await response.json();
-        setLatestBlog(data.docs && data.docs[0]);
-      } catch (error) {
-        setLatestBlog(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchLatestBlog();
-  }, []);
+  const fetchLatestBlog = async () => {
+    const isLocal = window.location.hostname === 'localhost';
+    const baseURL = isLocal
+      ? 'http://localhost:3000'
+      : 'https://dr-serzhans-psycare.onrender.com'; // update this to your Render URL
+
+    try {
+      const response = await fetch(`${baseURL}/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1`);
+      const data = await response.json();
+      setLatestBlog(data.docs && data.docs[0]);
+    } catch (error) {
+      setLatestBlog(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchLatestBlog();
+}, []);
   return (
     <>
       {/* Parallax CG image at the top */}
