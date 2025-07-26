@@ -11,6 +11,8 @@ import Blogs from './pages/Blogs';
 import BlogDetail from "./pages/BlogDetail";
 
 
+
+
 function App() {
   
 

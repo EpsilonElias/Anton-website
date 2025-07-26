@@ -33,7 +33,7 @@ export default buildConfig({
   cors: [
   'http://localhost:3001',
   'http://localhost:3000',
-  // Add your React app's URL here
+  'https://dr-serzhan-psycare.onrender.com',
   ],
   sharp,
   plugins: [

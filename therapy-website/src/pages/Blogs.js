@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
@@ -11,7 +13,7 @@ const BlogList = () => {
     const fetchPosts = async () => {
       try {
         // Fetch only published posts from your Payload API
-        const response = await fetch('http://localhost:3000/api/posts?where[status][equals]=published&sort=-publishedDate');
+        const response = await fetch(`${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
