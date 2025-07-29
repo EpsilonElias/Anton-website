@@ -2,7 +2,24 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-// Serve static files from the React app build directory
+// Set correct MIME types for static files
+app.use('/static/js', express.static(path.join(__dirname, 'build/static/js'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
+
+app.use('/static/css', express.static(path.join(__dirname, 'build/static/css'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
+  }
+}));
+
+// Serve other static files normally
 app.use(express.static(path.join(__dirname, 'build')));
 
 // Handle React routing - send all requests to React app
