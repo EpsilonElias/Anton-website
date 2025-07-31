@@ -45,7 +45,7 @@ const resources = [
   { name: "treatmentplan", file: "assets/pdfs/treatmentplan.pdf" },
   { name: "what-is-mindfulness", file: "assets/pdfs/what-is-mindfulness.pdf" },
   { name: "body-image-info-sheet", file: "assets/pdfs/body-image-info-sheet.pdf" },
-  { name: "Chris Voss_ Tahl Raz - Never Split the Difference_ Negotiating as if Your Life Depended on It-Random House Business (2017)", file: "assets/pdfs/Chris Voss_ Tahl Raz - Never Split the Difference_ Negotiating as if Your Life Depended on It-Random House Business (2017).epub" },
+  { name: "Negotiating as if Your Life Depended on It (2017)", file: "assets/pdfs/Negotiating as if Your Life Depended on It (2017).epub" },
   { name: "coping-skills-addictions", file: "assets/pdfs/coping-skills-addictions.pdf" },
   { name: "DBT-cheat-sheet", file: "assets/pdfs/DBT-cheat-sheet.pdf" },
   { name: "dbt-distress-tolerance-skills", file: "assets/pdfs/dbt-distress-tolerance-skills.pdf" },
