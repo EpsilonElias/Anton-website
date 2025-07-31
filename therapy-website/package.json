@@ -2,7 +2,7 @@
   "name": "therapy-website",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://EpsilonElias.github.io/Anton-website",
+  "homepage": "https://epsilonelias.github.io/Anton-website/",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
