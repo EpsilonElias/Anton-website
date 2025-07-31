@@ -1,23 +1,18 @@
 {
   "files": {
-    "main.css": "/Anton-website/static/css/main.1131bdf0.css",
-    "main.js": "/Anton-website/static/js/main.050cfd4d.js",
+    "main.css": "/Anton-website/static/css/main.e48fb80f.css",
+    "main.js": "/Anton-website/static/js/main.e8453555.js",
     "static/js/453.6af2d48e.chunk.js": "/Anton-website/static/js/453.6af2d48e.chunk.js",
-    "static/media/letting_go_of_resentment_worksheet.pdf": "/Anton-website/static/media/letting_go_of_resentment_worksheet.b32472b07e034906fa29.pdf",
     "static/media/face.jpg": "/Anton-website/static/media/face.0729d8f9162c462fa068.jpg",
-    "static/media/four_horsemen.pdf": "/Anton-website/static/media/four_horsemen.ed9e4eb57c2e55aa3d15.pdf",
-    "static/media/assertive_communication.pdf": "/Anton-website/static/media/assertive_communication.f03118bebf2599a1935d.pdf",
-    "static/media/relationship_check_in.pdf": "/Anton-website/static/media/relationship_check_in.75f6920761a01951ea48.pdf",
-    "static/media/soft_startups.pdf": "/Anton-website/static/media/soft_startups.003b36432632eacede96.pdf",
-    "static/media/DBT_distress_tolerance_skills.pdf": "/Anton-website/static/media/DBT_distress_tolerance_skills.ce70eb6e1b126b3d25e1.pdf",
-    "static/media/Acceptance_of_self_and_partner_2.pdf": "/Anton-website/static/media/Acceptance_of_self_and_partner_2.ee1758918e3f864fe92a.pdf",
+    "static/media/face2.jpg": "/Anton-website/static/media/face2.4c29a7c8c7b421aad611.jpg",
+    "static/media/wallpaper.jpg": "/Anton-website/static/media/wallpaper.3c634cb01af87c8751ee.jpg",
     "index.html": "/Anton-website/index.html",
-    "main.1131bdf0.css.map": "/Anton-website/static/css/main.1131bdf0.css.map",
-    "main.050cfd4d.js.map": "/Anton-website/static/js/main.050cfd4d.js.map",
+    "main.e48fb80f.css.map": "/Anton-website/static/css/main.e48fb80f.css.map",
+    "main.e8453555.js.map": "/Anton-website/static/js/main.e8453555.js.map",
     "453.6af2d48e.chunk.js.map": "/Anton-website/static/js/453.6af2d48e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1131bdf0.css",
-    "static/js/main.050cfd4d.js"
+    "static/css/main.e48fb80f.css",
+    "static/js/main.e8453555.js"
   ]
 }
