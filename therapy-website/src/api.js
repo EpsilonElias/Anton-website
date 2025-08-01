@@ -1,1 +1,1 @@
-export const API_BASE = ' https://am-snapshot-scenes-schedule.trycloudflare.com ';
+export const API_BASE = 'https://am-snapshot-scenes-schedule.trycloudflare.com';
