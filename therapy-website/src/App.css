@@ -566,9 +566,11 @@ html, body, #root, .App {
 /* Parallax Responsive Adjustments */
 @media (max-width: 900px) {
   .parallax-title {
-    font-size: 2rem;
-    padding: 0 10vw;
-    margin-top: 100px;
+    font-size: clamp(1.3rem, 7vw, 2rem); /* min 1.3rem, scales with vw, max 2rem */
+    padding: 0 8vw;
+    margin-top: 60px;
+    line-height: 1.1;
+    text-align: center;
   }
   .office-parallax-text {
     font-size: 1.2rem;
@@ -849,120 +851,72 @@ html, body, #root, .App {
 .about-square.approach h3 {
   color:  rgb(244, 170, 149);
 }
-@media (min-width: 1200px) {
-  .about-square {
-    width: 1100px; /* or any value up to your max-width */
-    padding: 56px; /* optional: add extra padding */
-  }
 
-  .about-square-content {
-    gap: 56px; /* increase content spacing if desired */
-  }
 
-  .about-square-image {
-    width: 240px;
-    height: 240px;
-  }
 
-  .about-square-text h3 {
-    font-size: 2.8rem;
-  }
-
-  .about-square-text p {
-    font-size: 1.3rem;
-  }
-}
-
-/* Medium screens (tablets) */
-@media (max-width: 900px) {
-  .about-container {
-    max-width: 800px;
-    margin-left: 50px; /* Adjust for sidebar */
-    padding: 32px 20px;
-    gap: 32px;
-  }
-  
-  .about-square {
-    padding: 32px;
-    min-height: 250px;
-  }
-  
-  .about-square-image {
-    width: 160px;
-    height: 160px;
-  }
-  
-  .about-square-text h3 {
-    font-size: 2.2rem;
-  }
-  
-  .about-square-text p {
-    font-size: 1.2rem;
-  }
-}
 
 /* Mobile responsive - Single standardized breakpoint */
 /* About page mobile centering - replace your existing mobile styles */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .about-container {
-    padding: 20px 15px;
-    margin-left: 25px; /* Account for collapsed sidebar */
-    margin-right: 15px; /* Add right margin for balance */
-    gap: 24px;
-    max-width: calc(100vw - 40px); /* Account for sidebar width */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center all about squares */
+    margin-left: 25px !important; /* Account for sidebar like home page */
+    padding: 0 15px !important;
+    gap: 20px !important;
+    align-items: center !important;
   }
   
   .about-square {
-    width: 90vw !important; /* Make responsive width */
-    max-width: 350px !important; /* Match your standardized width */
-    margin: 0 auto; /* Center the squares */
-    padding: 24px 20px;
-    border-radius: 16px;
-    min-height: auto;
-    box-sizing: border-box;
+    width: 90vw !important; /* Same as home page containers */
+    max-width: 320px !important; /* Same max-width as home page */
+    margin: 0 auto !important;
+    padding: 24px 16px !important; /* Same padding as home page */
+    border-radius: 12px !important; /* Same border radius as home page */
+    min-height: auto !important;
+    box-sizing: border-box !important;
   }
   
   .about-square-content,
   .about-square-content.reverse {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    flex-direction: column !important; /* Stack vertically */
+    gap: 16px !important;
+    align-items: center !important; /* Center everything */
   }
   
   .about-square-image {
-    width: 85vw !important;
-    max-width: 280px !important; /* Slightly smaller than container for nice spacing */
-    height: auto !important;
-    aspect-ratio: 1; /* Keep square aspect ratio */
-    border-radius: 16px;
-    margin-bottom: 0;
-    object-fit: cover;
+    width: 85vw !important; /* Same as home page images */
+    max-width: 300px !important; /* Same max-width as home page images */
+    height: 400px !important; /* Same height as home page face image */
+    object-fit: cover !important;
+    border-radius: 12px !important; /* Same border radius as home page */
+    margin-bottom: 0 !important;
   }
   
   .about-square-text {
-    text-align: center; /* Center text on mobile */
-    gap: 16px;
-    width: 100%; /* Take full width of container */
+    text-align: center !important; /* Center text like home page */
+    gap: 12px !important;
+    width: 100% !important;
   }
   
   .about-square-text h3 {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-    text-align: center; /* Center the headings */
+    font-size: 1.6rem !important; /* Mobile-friendly size */
+    margin-bottom: 8px !important;
+    text-align: center !important;
+  }
+  
+  .about-square-text h2 {
+    font-size: 1.3rem !important; /* Mobile-friendly size */
+    margin-bottom: 8px !important;
+    text-align: center !important;
   }
   
   .about-square-text p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    text-align: center; /* Center paragraphs for mobile */
-    margin-bottom: 0;
+    font-size: 1rem !important; /* Same as home page mobile text */
+    line-height: 1.5 !important; /* Same line height as home page */
+    text-align: center !important; /* Center paragraphs like home page */
+    margin-bottom: 8px !important;
   }
 }
-
 /*=============================================================================== */
 /* Contact page styles  */
 /*=============================================================================== */
