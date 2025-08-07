@@ -187,7 +187,7 @@ html, body, #root, .App {
   }
   .face-image {
     width: 90vw !important;
-    max-width: 350px !important;
+    max-width: 350px ;
     height: 450px !important; /* BIGGER HEIGHT FOR MOBILE */
     object-fit: cover !important;
     border-radius: 12px;
@@ -346,32 +346,84 @@ html, body, #root, .App {
 
 
 /* Responsive adjustments */
+/* Add these styles to your App.css file */
+
+/* Mobile responsive adjustments - update the existing @media query */
 @media (max-width: 900px) {
   .face-blogs-container {
     flex-direction: column;
     gap: 20px;
+    align-items: center; /* This centers the children */
+    margin-left: 25px; /* Account for sidebar width */
+    padding: 0 15px; /* Add some padding */
   }
  
   .face-image {
+  width: 90vw !important;
+  max-width: 350px !important;
+  height: 450px !important; /* BIGGER HEIGHT FOR MOBILE */
+  object-fit: cover !important;
+  border-radius: 12px;
+  margin: 0 auto;
+  display: block;
+  box-sizing: border-box;
+}
+  
+  .face-image-container {
     width: 100%;
-    max-width: 300px;
-    height: 300px; /* Fixed height for tablet */
+    display: flex;
+    justify-content: center; /* Center the image container */
+    align-items: center;
+    padding: 0;
   }
  
   .latest-blogs-container {
     height: auto;
     min-height: 250px;
+    width: 90vw;
+    max-width: 350px; /* Change this value */
+    margin: 0 auto; /* Center the container */
+    padding: 24px 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
  
   .bottom-content {
     flex-direction: column;
     gap: 20px;
+    align-items: center; /* Center the children */
+    margin-left: 25px; /* Account for sidebar */
+    padding: 0 15px;
   }
  
   .text-section {
-    width: 100%;
+    width: 90vw;
+    max-width: 350px; /* Change this value */
+    margin: 0 auto;
+  }
+  
+  .text-section .block-text p {
+    text-align: center; /* Center the text */
+  }
+
+  /* Make sure content wrapper is properly centered */
+  .content-wrapper {
+    margin-left: 0; /* Remove any left margin */
+    padding: 0; /* Remove padding that might offset centering */
+  }
+
+  /* Update activity box to match the same centering approach */
+  .activity-box {
+    width: 90vw;
+    max-width: 350px; /* Change this value */
+    margin: 0 auto;
+    padding: 40px 20px; /* Reduce padding for mobile */
   }
 }
+
+
 
 
 /*=============================================================================== */
@@ -854,18 +906,28 @@ html, body, #root, .App {
 }
 
 /* Mobile responsive - Single standardized breakpoint */
+/* About page mobile centering - replace your existing mobile styles */
+
 @media (max-width: 700px) {
   .about-container {
     padding: 20px 15px;
-    margin-left: 35px; /* Account for skinnier mobile sidebar */
+    margin-left: 25px; /* Account for collapsed sidebar */
+    margin-right: 15px; /* Add right margin for balance */
     gap: 24px;
-    max-width: calc(100vw - 50px); /* Account for sidebar width */
+    max-width: calc(100vw - 40px); /* Account for sidebar width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center all about squares */
   }
   
   .about-square {
+    width: 90vw !important; /* Make responsive width */
+    max-width: 350px !important; /* Match your standardized width */
+    margin: 0 auto; /* Center the squares */
     padding: 24px 20px;
     border-radius: 16px;
     min-height: auto;
+    box-sizing: border-box;
   }
   
   .about-square-content,
@@ -876,28 +938,32 @@ html, body, #root, .App {
   }
   
   .about-square-image {
-    width: 85vw;
-    max-width: 220px;
-    height: auto;
+    width: 85vw !important;
+    max-width: 280px !important; /* Slightly smaller than container for nice spacing */
+    height: auto !important;
     aspect-ratio: 1; /* Keep square aspect ratio */
     border-radius: 16px;
     margin-bottom: 0;
+    object-fit: cover;
   }
   
   .about-square-text {
     text-align: center; /* Center text on mobile */
     gap: 16px;
+    width: 100%; /* Take full width of container */
   }
   
   .about-square-text h3 {
     font-size: 1.6rem;
     margin-bottom: 12px;
+    text-align: center; /* Center the headings */
   }
   
   .about-square-text p {
     font-size: 1.1rem;
     line-height: 1.6;
-    text-align: left; /* Keep paragraphs left-aligned for readability */
+    text-align: center; /* Center paragraphs for mobile */
+    margin-bottom: 0;
   }
 }
 
@@ -979,7 +1045,7 @@ html, body, #root, .App {
 @media (max-width: 700px) {
   .contact-form {
     padding: 16px 8vw;
-    max-width: 70vw;
+    max-width: 65vw;
     margin: 24px auto 0 auto;
     border-radius: 12px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -1103,6 +1169,7 @@ html, body, #root, .App {
 @media (max-width: 700px) {
   
   
+  
   .resources-list {
     padding: 0 8vw;
     margin-top: 0;
@@ -1144,6 +1211,28 @@ html, body, #root, .App {
     font-size: 1rem;
     min-width: 60px;
   }
+  
+  .full-width-section.therapy-header-section {
+    padding: 32px 8px 16px 33px; /* Top, right, bottom, left (left for sidebar) */
+    min-height: 120px;
+    text-align: center;
+  }
+  .full-width-section.therapy-header-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Quicksand', sans-serif;
+    color: white;
+  }
+  .full-width-section.therapy-header-section p {
+    font-size: 1rem;
+    max-width: 75vw;
+    margin: 0 auto;
+    padding: 0 2vw;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+  }
+
 }
 
 
@@ -1268,4 +1357,5 @@ html, body, #root, .App {
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     transform: none;
   }
+  
 }

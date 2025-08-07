@@ -93,7 +93,7 @@ function Blogs() {
         }}
       >
         <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Blog</h2>
-        <p className="about-header-desc">
+        <p className="therapy-header-desc">
           Read articles and insights on therapy, mental health, and wellness.
         </p>
       </div>

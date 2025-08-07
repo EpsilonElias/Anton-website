@@ -21,7 +21,7 @@ function About() {
         }}
       >
         <h2 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>About Psycare</h2>
-        <p className="about-header-desc">Learn more about my background, Team, and approach to therapy.</p>
+        <p className="therapy-header-desc">Learn more about my background, Team, and approach to therapy.</p>
       </div>
 
       {/* Blank space */}
