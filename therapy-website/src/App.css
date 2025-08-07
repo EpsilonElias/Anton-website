@@ -153,59 +153,14 @@ html, body, #root, .App {
 
 
 /*=============================================================================== */
-
-
 /* HOME.js */
-
-
 /*=============================================================================== */
-
-
 
 /*=============================================================================== */
 /* HERO BLOCK STYLES */
 /*=============================================================================== */
-@media (max-width: 600px) {
-  .activity-box {
-    padding: 16px 8vw 16px 16vw;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    width: calc(80vw - 48px); /* Account for sidebar width and padding */
-    max-width: 95vw;
-    margin: 18px auto 0 auto;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-  .activity-box p {
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-  }
-  .activity-button {
-    width: 100%;
-    padding: 12px 0;
-    font-size: 1rem;
-  }
-  .face-image {
-    width: 90vw !important;
-    max-width: 350px ;
-    height: 450px !important; /* BIGGER HEIGHT FOR MOBILE */
-    object-fit: cover !important;
-    border-radius: 12px;
-    margin: 0 auto;
-    display: block;
-    box-sizing: border-box;
-  }
-  
-  .face-image-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 15px;
-    background: none;
-    overflow: hidden;
-  }
-}/* New layout styles for the updated home page */
+
+/* New layout styles for the updated home page */
 .content-wrapper {
   max-width: 1200px;
   margin: 0 auto;
@@ -333,9 +288,11 @@ html, body, #root, .App {
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .latest-blog-button:hover {
   background: rgba(244,170,149,0.25);
 }
+
 .latest-blog-button h4,
 .latest-blog-button p,
 .latest-blog-button .blog-meta {
@@ -343,46 +300,50 @@ html, body, #root, .App {
   color: inherit;
 }
 
-
-
-/* Responsive adjustments */
-/* Add these styles to your App.css file */
-
-/* Mobile responsive adjustments - update the existing @media query */
+/* MOBILE RESPONSIVE STYLES */
 @media (max-width: 900px) {
+  /* Remove default content wrapper padding on mobile */
+  .content-wrapper {
+    margin-left: 0;
+    padding: 0;
+  }
+
+  /* Face and blogs container - stack vertically */
   .face-blogs-container {
     flex-direction: column;
     gap: 20px;
-    align-items: center; /* This centers the children */
+    align-items: center;
     margin-left: 25px; /* Account for sidebar width */
-    padding: 0 15px; /* Add some padding */
+    padding: 0 15px;
   }
  
+  /* Face image - consistent responsive sizing */
   .face-image {
-  width: 90vw !important;
-  max-width: 350px !important;
-  height: 450px !important; /* BIGGER HEIGHT FOR MOBILE */
-  object-fit: cover !important;
-  border-radius: 12px;
-  margin: 0 auto;
-  display: block;
-  box-sizing: border-box;
-}
+    width: 90vw !important;
+    max-width: 350px !important;
+    height: 450px !important;
+    object-fit: cover !important;
+    border-radius: 12px;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+  }
   
   .face-image-container {
     width: 100%;
     display: flex;
-    justify-content: center; /* Center the image container */
+    justify-content: center;
     align-items: center;
     padding: 0;
   }
  
+  /* Latest blogs container - match face image sizing */
   .latest-blogs-container {
     height: auto;
     min-height: 250px;
     width: 90vw;
-    max-width: 350px; /* Change this value */
-    margin: 0 auto; /* Center the container */
+    max-width: 350px;
+    margin: 0 auto;
     padding: 24px 16px;
     box-sizing: border-box;
     display: flex;
@@ -390,40 +351,75 @@ html, body, #root, .App {
     align-items: center;
   }
  
+  /* Bottom content - stack vertically */
   .bottom-content {
     flex-direction: column;
     gap: 20px;
-    align-items: center; /* Center the children */
+    align-items: center;
     margin-left: 25px; /* Account for sidebar */
     padding: 0 15px;
   }
  
+  /* Text section - match face image sizing */
   .text-section {
     width: 90vw;
-    max-width: 350px; /* Change this value */
+    max-width: 350px;
     margin: 0 auto;
   }
   
   .text-section .block-text p {
-    text-align: center; /* Center the text */
+    text-align: center;
+    font-size: 1rem; /* Slightly smaller for mobile */
   }
 
-  /* Make sure content wrapper is properly centered */
-  .content-wrapper {
-    margin-left: 0; /* Remove any left margin */
-    padding: 0; /* Remove padding that might offset centering */
-  }
-
-  /* Update activity box to match the same centering approach */
+  /* Activity box - match face image sizing and improve mobile layout */
   .activity-box {
     width: 90vw;
-    max-width: 350px; /* Change this value */
+    max-width: 350px;
     margin: 0 auto;
-    padding: 40px 20px; /* Reduce padding for mobile */
+    padding: 32px 20px; /* Reduce padding for mobile */
+    box-sizing: border-box;
+  }
+
+  .activity-box p {
+    font-size: 1.2rem; /* Slightly smaller for mobile */
+    margin-bottom: 18px;
+  }
+
+  .activity-button {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    box-sizing: border-box;
   }
 }
 
+/* Extra small screens - further adjustments */
+@media (max-width: 600px) {
+  .face-blogs-container,
+  .bottom-content {
+    margin-left: 20px; /* Slightly less margin for very small screens */
+    padding: 0 10px;
+  }
 
+  .latest-blogs-container h3 {
+    font-size: 1.5rem; /* Smaller heading on mobile */
+    text-align: center;
+  }
+
+  .text-section .block-text p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .activity-box {
+    padding: 24px 16px; /* Even smaller padding for very small screens */
+  }
+
+  .activity-box p {
+    font-size: 1.1rem;
+  }
+}
 
 
 /*=============================================================================== */
