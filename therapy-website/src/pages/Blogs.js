@@ -1,75 +1,53 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { API_BASE } from '../api';
+import React from "react";
 
-
-
-const BlogList = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        // Fetch only published posts from your Payload API
-        const response = await fetch(`${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate`);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        setPosts(data.docs);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching posts:', error);
-        setError(error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
-
-  if (loading) {
-    return <div className="blog-loading">Loading blog posts...</div>;
-  }
-
-  if (error) {
-    return <div className="blog-error">Error loading posts: {error}</div>;
-  }
-
-  if (posts.length === 0) {
-    return <div className="blog-empty">No blog posts found.</div>;
-  }
-
+const BlogSection = () => {
   return (
-    <div className="blog-container">
-      <div className="blog-posts">
-        {posts.map((post) => (
-          <article
-            key={post.id}
-            className="blog-post"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate(`/blogs/${post.id}`)}
-          >
-            <h2>{post.title}</h2>
-            {post.excerpt && <p className="blog-excerpt">{post.excerpt}</p>}
-            <div className="blog-content">
-              {post.content && (
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              )}
-            </div>
-            <div className="blog-meta">
-              <small>
-                Published: {new Date(post.publishedDate).toLocaleDateString()}
-              </small>
-            </div>
-          </article>
-        ))}
-      </div>
+    <div className="blog-section" style={{ 
+      maxWidth: "800px", 
+      margin: "0 auto", 
+      padding: "40px 20px",
+      textAlign: "center" 
+    }}>
+      <h2 style={{ 
+        fontSize: "2.2rem", 
+        marginBottom: "1rem",
+        color: "#333"
+      }}>
+        Latest from Our Blog
+      </h2>
+      
+      <p style={{ 
+        fontSize: "1.1rem", 
+        color: "#666", 
+        marginBottom: "2rem",
+        lineHeight: "1.6"
+      }}>
+        Read our latest insights and articles on therapy, mental health, and wellness. 
+        Our blog features expert advice, research updates, and practical tips for your wellbeing journey.
+      </p>
+      
+      {/* Simple link to your cached blog */}
+      <a 
+        href="https://epsilonelias.github.io/Connection/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{
+          display: "inline-block",
+          backgroundColor: "rgb(244, 170, 149)",
+          color: "white",
+          padding: "12px 32px",
+          borderRadius: "25px",
+          textDecoration: "none",
+          fontSize: "1.1rem",
+          fontWeight: "500",
+          transition: "background-color 0.3s ease",
+          boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)"
+        }}
+        onMouseOver={(e) => e.target.style.backgroundColor = "rgb(234, 160, 139)"}
+        onMouseOut={(e) => e.target.style.backgroundColor = "rgb(244, 170, 149)"}
+      >
+        Visit Our Blog →
+      </a>
     </div>
   );
 };
@@ -100,7 +78,7 @@ function Blogs() {
 
       {/* Blog content goes here */}
       <div style={{ padding: "32px 0" }}>
-        <BlogList />
+        <BlogSection />
       </div>
     </div>
   );
