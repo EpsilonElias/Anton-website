@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
+import { corsProxy } from '../corsProxy';
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
@@ -11,14 +12,10 @@ const BlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Fetch from your Payload CMS API
-        const response = await fetch(`${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate`);
+        // Use CORS proxy to fetch from your Payload CMS API
+        const url = `${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate`;
+        const data = await corsProxy(url);
         
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
         setPosts(data.docs || []); // Payload CMS returns docs array
         setLoading(false);
       } catch (error) {
@@ -49,10 +46,39 @@ const BlogList = () => {
       <div style={{ 
         textAlign: "center", 
         padding: "40px", 
-        color: "#d32f2f",
-        fontSize: "1.1rem" 
+        maxWidth: "600px",
+        margin: "0 auto"
       }}>
-        Error loading posts: {error}
+        <div style={{
+          backgroundColor: "#fff3cd",
+          border: "1px solid #ffeaa7",
+          borderRadius: "8px",
+          padding: "20px",
+          marginBottom: "20px"
+        }}>
+          <h3 style={{ color: "#856404", marginBottom: "10px" }}>
+            Blog temporarily unavailable
+          </h3>
+          <p style={{ color: "#856404", lineHeight: "1.5" }}>
+            We're experiencing a technical issue with our blog service. 
+            Our team is working to resolve this as quickly as possible.
+          </p>
+        </div>
+        <button
+          onClick={() => window.location.reload()}
+          style={{
+            backgroundColor: "rgb(244, 170, 149)",
+            color: "white",
+            padding: "10px 20px",
+            borderRadius: "20px",
+            border: "none",
+            fontSize: "1rem",
+            fontWeight: "500",
+            cursor: "pointer"
+          }}
+        >
+          Try Again
+        </button>
       </div>
     );
   }

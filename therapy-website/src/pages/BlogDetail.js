@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Undo2 } from "lucide-react";
 import { API_BASE } from '../api';
+import { corsProxy } from '../corsProxy';
 
 function BlogDetail() {
   const { id } = useParams();
@@ -13,9 +14,8 @@ function BlogDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${API_BASE}/api/posts/${id}`);
-        if (!response.ok) throw new Error("Failed to fetch blog post");
-        const data = await response.json();
+        const url = `${API_BASE}/api/posts/${id}`;
+        const data = await corsProxy(url);
         setPost(data); // Payload CMS returns the post directly for single post
       } catch (err) {
         setError(err.message);

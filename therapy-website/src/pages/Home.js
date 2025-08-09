@@ -2,6 +2,7 @@ import face from '../face.jpg';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
+import { corsProxy } from '../corsProxy';
 
 
 function Home() {
@@ -12,11 +13,8 @@ function Home() {
   useEffect(() => {
     const fetchLatestBlog = async () => {
       try {
-        const response = await fetch(`${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
+        const url = `${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1`;
+        const data = await corsProxy(url);
         const posts = data.docs || [];
         
         // Get the latest post
@@ -131,11 +129,24 @@ function Home() {
                 </div>
               ) : (
                 <div style={{padding: "16px 0"}}>
-                  <p style={{color: "#666"}}>No blog posts available.</p>
+                  <div style={{
+                    backgroundColor: "#fff3cd",
+                    border: "1px solid #ffeaa7",
+                    borderRadius: "6px",
+                    padding: "12px",
+                    marginBottom: "12px"
+                  }}>
+                    <p style={{
+                      color: "#856404", 
+                      fontSize: "0.9rem",
+                      margin: "0"
+                    }}>
+                      Blog service temporarily unavailable
+                    </p>
+                  </div>
                   <button
                     onClick={() => navigate('/blogs')}
                     style={{
-                      marginTop: "12px",
                       backgroundColor: "rgb(244, 170, 149)",
                       color: "white",
                       padding: "8px 16px",
