@@ -1,8 +1,38 @@
 import face from '../face.jpg';
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { API_BASE } from '../api';
 
 
 function Home() {
+  const [latestBlog, setLatestBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchLatestBlog = async () => {
+      try {
+        const response = await fetch(`${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        const posts = data.docs || [];
+        
+        // Get the latest post
+        if (Array.isArray(posts) && posts.length > 0) {
+          setLatestBlog(posts[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching latest blog:', error);
+        setLatestBlog(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchLatestBlog();
+  }, []);
+
   return (
     <>
       {/* Parallax CG image at the top */}
@@ -38,30 +68,88 @@ function Home() {
 
           {/* Latest blogs section */}
           <div className="latest-blogs-container">
-            <h3>Latest Blogs</h3>
+            <h3>Latest Blog</h3>
             <div className="blog-placeholder">
-              <div style={{padding: "16px 0"}}>
-                <h4 style={{marginBottom: "8px"}}>Explore Our Blog</h4>
-                <p>Read our latest insights on therapy, mental health, and wellness.</p>
-                <a 
-                  href="https://epsilonelias.github.io/Connection/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+              {loading ? (
+                <div style={{padding: "16px 0"}}>
+                  <p style={{color: "#666"}}>Loading latest blog...</p>
+                </div>
+              ) : latestBlog ? (
+                <div 
                   style={{
-                    display: "inline-block",
-                    marginTop: "12px",
-                    backgroundColor: "rgb(244, 170, 149)",
-                    color: "white",
-                    padding: "8px 16px",
-                    borderRadius: "15px",
-                    textDecoration: "none",
-                    fontSize: "0.9rem",
-                    fontWeight: "500"
+                    padding: "16px 0",
+                    cursor: "pointer",
+                    borderRadius: "8px",
+                    transition: "background-color 0.2s ease"
                   }}
+                  onClick={() => navigate('/blogs')}
+                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#f9f9f9"}
+                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                 >
-                  Visit Blog →
-                </a>
-              </div>
+                  <h4 style={{
+                    marginBottom: "8px",
+                    color: "#333",
+                    fontSize: "1.2rem"
+                  }}>
+                    {latestBlog.title}
+                  </h4>
+                  
+                  {latestBlog.excerpt && (
+                    <p style={{
+                      color: "#666",
+                      fontSize: "0.95rem",
+                      lineHeight: "1.5",
+                      marginBottom: "12px"
+                    }}>
+                      {latestBlog.excerpt.substring(0, 120)}
+                      {latestBlog.excerpt.length > 120 ? '...' : ''}
+                    </p>
+                  )}
+                  
+                  <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "12px"
+                  }}>
+                    <small style={{color: "#888"}}>
+                      {latestBlog.publishedDate ? 
+                        new Date(latestBlog.publishedDate).toLocaleDateString() : 
+                        latestBlog.date ? new Date(latestBlog.date).toLocaleDateString() : 
+                        'Recently published'
+                      }
+                    </small>
+                    
+                    <span style={{
+                      color: "rgb(244, 170, 149)",
+                      fontSize: "0.9rem",
+                      fontWeight: "500"
+                    }}>
+                      Read more →
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <div style={{padding: "16px 0"}}>
+                  <p style={{color: "#666"}}>No blog posts available.</p>
+                  <button
+                    onClick={() => navigate('/blogs')}
+                    style={{
+                      marginTop: "12px",
+                      backgroundColor: "rgb(244, 170, 149)",
+                      color: "white",
+                      padding: "8px 16px",
+                      borderRadius: "15px",
+                      border: "none",
+                      fontSize: "0.9rem",
+                      fontWeight: "500",
+                      cursor: "pointer"
+                    }}
+                  >
+                    Visit Blog Page
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
