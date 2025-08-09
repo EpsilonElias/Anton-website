@@ -8,7 +8,6 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Resources from './pages/Resources';
 import Blogs from './pages/Blogs';
-import BlogDetail from "./pages/BlogDetail";
 
 
 
@@ -28,7 +27,6 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/resources" element={<Resources />} />
               <Route path="/blogs" element={<Blogs />} />
-              <Route path="/blogs/:id" element={<BlogDetail />} />
             </Routes>
           </div>
         </div>

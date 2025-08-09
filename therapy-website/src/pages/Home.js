@@ -1,29 +1,8 @@
 import face from '../face.jpg';
-import { Instagram } from 'lucide-react';
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
-import { API_BASE } from '../api';
+import React from "react";
 
 
 function Home() {
-  const [latestBlog, setLatestBlog] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-   useEffect(() => {
-    const fetchLatestBlog = async () => {
-      try {
-        const response = await fetch(`${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1`);
-        const data = await response.json();
-        setLatestBlog(data.docs && data.docs[0]);
-      } catch (error) {
-        setLatestBlog(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchLatestBlog();
-  }, []);
   return (
     <>
       {/* Parallax CG image at the top */}
@@ -61,33 +40,28 @@ function Home() {
           <div className="latest-blogs-container">
             <h3>Latest Blogs</h3>
             <div className="blog-placeholder">
-              {loading && <p>Loading latest blog...</p>}
-              {!loading && latestBlog ? (
-                <button
-                  className="latest-blog-button"
-                  onClick={() => navigate('/blogs')}
+              <div style={{padding: "16px 0"}}>
+                <h4 style={{marginBottom: "8px"}}>Explore Our Blog</h4>
+                <p>Read our latest insights on therapy, mental health, and wellness.</p>
+                <a 
+                  href="https://epsilonelias.github.io/Connection/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
                   style={{
-                    width: "100%",
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    textAlign: "left",
-                    cursor: "pointer"
+                    display: "inline-block",
+                    marginTop: "12px",
+                    backgroundColor: "rgb(244, 170, 149)",
+                    color: "white",
+                    padding: "8px 16px",
+                    borderRadius: "15px",
+                    textDecoration: "none",
+                    fontSize: "0.9rem",
+                    fontWeight: "500"
                   }}
                 >
-                  <div style={{padding: "16px 0"}}>
-                    <h4 style={{marginBottom: "8px"}}>{latestBlog.title}</h4>
-                    {latestBlog.excerpt && <p>{latestBlog.excerpt}</p>}
-                    <div className="blog-meta">
-                      <small>
-                        Published: {new Date(latestBlog.publishedDate).toLocaleDateString()}
-                      </small>
-                    </div>
-                  </div>
-                </button>
-              ) : !loading && (
-                <p>No blog posts found.</p>
-              )}
+                  Visit Blog →
+                </a>
+              </div>
             </div>
           </div>
         </div>
