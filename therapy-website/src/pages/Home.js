@@ -2,7 +2,6 @@ import face from '../face.jpg';
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
-import { corsProxy } from '../corsProxy';
 
 
 function Home() {
@@ -13,11 +12,10 @@ function Home() {
   useEffect(() => {
     const fetchLatestBlog = async () => {
       try {
-        const url = `${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate&limit=1`;
-        const data = await corsProxy(url);
-        const posts = data.docs || [];
-        
-        // Get the latest post
+        const response = await fetch(API_BASE);
+        if (!response.ok) throw new Error('Failed to fetch blog data');
+        const data = await response.json();
+        const posts = data.posts || data;
         if (Array.isArray(posts) && posts.length > 0) {
           setLatestBlog(posts[0]);
         }

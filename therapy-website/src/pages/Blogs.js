@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
-import { corsProxy } from '../corsProxy';
 
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
@@ -12,11 +11,10 @@ const BlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        // Use CORS proxy to fetch from your Payload CMS API
-        const url = `${API_BASE}/api/posts?where[status][equals]=published&sort=-publishedDate`;
-        const data = await corsProxy(url);
-        
-        setPosts(data.docs || []); // Payload CMS returns docs array
+        const response = await fetch(API_BASE);
+        if (!response.ok) throw new Error('Failed to fetch blog data');
+        const data = await response.json();
+        setPosts(data.posts || data); // Use 'posts' array or root array
         setLoading(false);
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -24,7 +22,6 @@ const BlogList = () => {
         setLoading(false);
       }
     };
-
     fetchPosts();
   }, []);
 
@@ -137,7 +134,6 @@ const BlogList = () => {
             }}>
               {post.title}
             </h2>
-            
             {post.excerpt && (
               <p style={{
                 color: "#666",
@@ -148,7 +144,6 @@ const BlogList = () => {
                 {post.excerpt}
               </p>
             )}
-            
             {post.content && (
               <div style={{
                 color: "#555",
@@ -156,18 +151,11 @@ const BlogList = () => {
                 marginBottom: "16px",
                 fontSize: "0.95rem"
               }}>
-                {typeof post.content === 'string' ? (
-                  <div dangerouslySetInnerHTML={{ 
-                    __html: post.content.substring(0, 200) + (post.content.length > 200 ? '...' : '')
-                  }} />
-                ) : (
-                  <p style={{color: "#666"}}>
-                    Click to read the full article...
-                  </p>
-                )}
+                <div dangerouslySetInnerHTML={{ 
+                  __html: post.content.substring(0, 200) + (post.content.length > 200 ? '...' : '')
+                }} />
               </div>
             )}
-            
             <div style={{
               display: "flex",
               justifyContent: "space-between",
@@ -183,7 +171,6 @@ const BlogList = () => {
                   'Recently published'
                 }
               </small>
-              
               <span style={{
                 color: "rgb(244, 170, 149)",
                 fontSize: "0.9rem",
