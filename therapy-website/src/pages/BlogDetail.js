@@ -155,14 +155,8 @@ function BlogDetail() {
             fontSize: "1.1rem",
             color: "#333"
           }}>
-            {post.content ? (
-              typeof post.content === 'string' ? (
-                <div dangerouslySetInnerHTML={{ __html: post.content }} />
-              ) : (
-                <div style={{ color: "#666", fontStyle: "italic" }}>
-                  Content format not supported for display. Please contact the administrator.
-                </div>
-              )
+            {(post.contentHtml || post.content) ? (
+              <div dangerouslySetInnerHTML={{ __html: post.contentHtml || post.content }} />
             ) : (
               <div style={{ color: "#666", fontStyle: "italic" }}>
                 No content available for this post.
