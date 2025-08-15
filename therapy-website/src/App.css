@@ -38,18 +38,29 @@ html, body, #root, .App {
 
 
 /*=============================================================================== */
-
-
 /* Side bar styles  */
-
-
 /*=============================================================================== */
+:root {
+  --color1: rgb(244, 170, 149);
+  --color2: rgb(243, 191, 154);
+  --color3: rgb(243, 200, 154);
+  --color4: rgb(243, 214, 154);
+}
 
 .sidebar {
-  width: 40px; /* collapsed width */
+  width: 40px;
   height: 100vh;
-  background: linear-gradient(to bottom, rgb(244, 170, 149),rgb(243, 191, 154), rgb(243, 200, 154), rgb(243, 214, 154));
-  /* background: linear-gradient(to bottom, #FA897B, #FFDD94); */
+  /* Simplified gradient pattern that repeats seamlessly */
+  background: linear-gradient(
+    to bottom,
+    var(--color1) 0%,
+    var(--color2) 25%,
+    var(--color3) 50%,
+    var(--color4) 75%,
+    var(--color1) 100%
+  );
+  background-size: 100% 400px; /* Fixed size instead of percentage */
+  animation: continuousDownward 3s linear infinite;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
@@ -62,8 +73,17 @@ html, body, #root, .App {
   z-index: 10;
 }
 
+@keyframes continuousDownward {
+  from {
+    background-position: 0% -400px; /* Start from negative position */
+  }
+  to {
+    background-position: 0% 0px; /* End at 0 */
+  }
+}
+
 .sidebar:hover {
-  width: 200px; /* expanded width */
+  width: 200px;
   padding: 20px;
 }
 
@@ -102,6 +122,7 @@ html, body, #root, .App {
 .sidebar:hover button::before {
   content: '';
 }
+
 .main-content {
   max-width: 900px;      /* or any width you prefer */
   margin: 0 auto;        /* centers the content horizontally */
@@ -121,6 +142,7 @@ html, body, #root, .App {
 .sidebar:hover ~ .main-content {
   padding-left: 220px; /* enough to clear the expanded sidebar */
 }
+
 .sidebar-menu-icon {
   display: flex;
   align-items: center;
@@ -135,21 +157,20 @@ html, body, #root, .App {
   opacity: 0;
   pointer-events: none;
 }
+
 .sidebar-menu-svg {
   color: #fff; /* Change this to any color you want */
 }
-
 
 @media (max-width: 600px) {
   .sidebar {
     width: 25px; /* skinnier collapsed width for mobile */
   }
-  
+ 
   .sidebar:hover {
     width: 200px; /* keep same expanded width */
   }
 }
-
 
 
 /*=============================================================================== */
