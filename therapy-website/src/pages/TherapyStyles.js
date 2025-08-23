@@ -35,7 +35,9 @@ function TherapyStyles() {
     const radius = isMobile ? 200 : 400;
     return {
       transform: `rotateY(${angle}deg) translateZ(${radius}px)`,
-      opacity: Math.abs(angle) > 90 ? 0.15 : 1,
+      opacity: isMobile
+      ? (Math.abs(angle) < 1 ? 1 : 0) // on mobile: only the active card is visible
+      : (Math.abs(angle) > 90 ? 0.15 : 1),
       zIndex: 100 - Math.abs(angle),
       background: `linear-gradient(135deg, ${therapyStyles[idx].colors.join(", ")})`
     };

@@ -28,6 +28,112 @@ function BlogDetail() {
     fetchPost();
   }, [id]);
 
+  // Function to process content and handle images
+  const processContent = (content) => {
+    if (!content) return null;
+    
+    // If content already contains HTML, return it as is
+    if (typeof content === 'string' && content.includes('<')) {
+      return content;
+    }
+    
+    // If content is a string without HTML, wrap it in paragraphs
+    if (typeof content === 'string') {
+      return content.split('\n').map(paragraph => 
+        paragraph.trim() ? `<p>${paragraph}</p>` : ''
+      ).join('');
+    }
+    
+    return content;
+  };
+
+  // Function to render featured image if available
+  const renderFeaturedImage = () => {
+    // Check for various possible image field names from Payload CMS
+    const imageUrl = post.featuredImage?.url || 
+                    post.image?.url || 
+                    post.thumbnail?.url ||
+                    post.coverImage?.url ||
+                    post.heroImage?.url;
+    
+    const imageAlt = post.featuredImage?.alt || 
+                    post.image?.alt || 
+                    post.thumbnail?.alt ||
+                    post.coverImage?.alt ||
+                    post.heroImage?.alt ||
+                    post.title;
+
+    if (imageUrl) {
+      return (
+        <div style={{
+          marginBottom: "30px",
+          borderRadius: "8px",
+          overflow: "hidden",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
+        }}>
+          <img 
+            src={imageUrl}
+            alt={imageAlt}
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              maxHeight: "400px",
+              objectFit: "cover"
+            }}
+            onError={(e) => {
+              e.target.style.display = 'none';
+            }}
+          />
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // Function to render image gallery if available
+  const renderImageGallery = () => {
+    const images = post.images || post.gallery || [];
+    
+    if (images && images.length > 0) {
+      return (
+        <div style={{
+          marginBottom: "30px"
+        }}>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: images.length === 1 ? "1fr" : "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "15px"
+          }}>
+            {images.map((img, index) => (
+              <div key={index} style={{
+                borderRadius: "8px",
+                overflow: "hidden",
+                boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)"
+              }}>
+                <img 
+                  src={img.url || img}
+                  alt={img.alt || `Gallery image ${index + 1}`}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                    maxHeight: "300px",
+                    objectFit: "cover"
+                  }}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
+
   if (loading) {
     return (
       <div style={{ 
@@ -151,18 +257,24 @@ function BlogDetail() {
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
           lineHeight: "1.7"
         }}>
+          {/* Featured Image */}
+          {renderFeaturedImage()}
+
           <div style={{
             fontSize: "1.1rem",
             color: "#333"
           }}>
             {(post.contentHtml || post.content) ? (
-              <div dangerouslySetInnerHTML={{ __html: post.contentHtml || post.content }} />
+              <div dangerouslySetInnerHTML={{ __html: processContent(post.contentHtml || post.content) }} />
             ) : (
               <div style={{ color: "#666", fontStyle: "italic" }}>
                 No content available for this post.
               </div>
             )}
           </div>
+
+          {/* Image Gallery */}
+          {renderImageGallery()}
           
           <div style={{
             marginTop: "40px",
