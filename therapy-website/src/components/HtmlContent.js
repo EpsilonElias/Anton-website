@@ -24,10 +24,17 @@ const HtmlContent = ({ htmlContent }) => {
           let src = srcMatch[1];
           const alt = altMatch ? altMatch[1] : 'Image';
           
-          // Ensure absolute URL
-          if (!src.startsWith('http')) {
-            const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-            src = src.startsWith('/') ? `${baseUrl}${src}` : `${baseUrl}/${src}`;
+          // Check if URL is already proxied through images.weserv.nl
+          let proxiedSrc = src;
+          if (!src.includes('images.weserv.nl')) {
+            // Ensure absolute URL
+            if (!src.startsWith('http')) {
+              const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+              src = src.startsWith('/') ? `${baseUrl}${src}` : `${baseUrl}/${src}`;
+            }
+            
+            // Use a CORS proxy for the image to avoid CORS issues
+            proxiedSrc = `https://images.weserv.nl/?url=${encodeURIComponent(src)}&w=800&q=85`;
           }
           
           // Parse style
@@ -57,7 +64,7 @@ const HtmlContent = ({ htmlContent }) => {
           return (
             <SafeImage
               key={index}
-              src={src}
+              src={proxiedSrc}
               alt={alt}
               style={styleObj}
             />

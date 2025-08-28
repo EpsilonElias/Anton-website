@@ -112,6 +112,11 @@ const BlogList = () => {
             featuredImageUrl = featuredImageUrl.startsWith('/') ? `${baseUrl}${featuredImageUrl}` : `${baseUrl}/${featuredImageUrl}`;
           }
           
+          // Use CORS proxy for featured images
+          if (featuredImageUrl) {
+            featuredImageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(featuredImageUrl)}&w=400&h=200&fit=cover&q=85`;
+          }
+          
           return (
             <article
               key={post.id || index}
@@ -144,7 +149,6 @@ const BlogList = () => {
                   <img 
                     src={featuredImageUrl}
                     alt={post.title}
-                    crossOrigin="anonymous"
                     style={{
                       width: "100%",
                       height: "100%",

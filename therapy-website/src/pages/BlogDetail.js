@@ -63,6 +63,9 @@ function BlogDetail() {
                     post.title;
 
     if (imageUrl) {
+      // Use a CORS proxy for the featured image to avoid CORS issues
+      const proxiedImageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(imageUrl)}&w=800&h=400&fit=cover&q=85`;
+      
       return (
         <div style={{
           marginBottom: "30px",
@@ -71,7 +74,7 @@ function BlogDetail() {
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
         }}>
           <SafeImage 
-            src={imageUrl}
+            src={proxiedImageUrl}
             alt={imageAlt}
             style={{
               width: "100%",
