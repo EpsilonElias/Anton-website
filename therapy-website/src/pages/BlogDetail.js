@@ -4,7 +4,6 @@ import { Undo2 } from "lucide-react";
 import { API_BASE } from '../api';
 import SafeImage from '../components/SafeImage';
 import HtmlContent from '../components/HtmlContent';
-import SimpleImageTest from '../components/SimpleImageTest';
 
 function BlogDetail() {
   const { id } = useParams();
@@ -243,9 +242,6 @@ function BlogDetail() {
           </p>
         )}
       </div>
-
-      {/* Temporary Image Test Component */}
-      <SimpleImageTest />
 
       {/* Blog content */}
       <div style={{ 
