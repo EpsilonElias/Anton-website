@@ -1,5 +1,5 @@
 import React from 'react';
-import SafeImage from './SafeImage';
+import BasicImage from './BasicImage';
 
 const HtmlContent = ({ htmlContent }) => {
   if (!htmlContent) return null;
@@ -62,7 +62,7 @@ const HtmlContent = ({ htmlContent }) => {
           }
           
           return (
-            <SafeImage
+            <BasicImage
               key={index}
               src={proxiedSrc}
               alt={alt}
