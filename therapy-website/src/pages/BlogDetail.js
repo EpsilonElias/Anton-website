@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Undo2 } from "lucide-react";
 import { API_BASE } from '../api';
+import SafeImage from '../components/SafeImage';
+import HtmlContent from '../components/HtmlContent';
 
 function BlogDetail() {
   const { id } = useParams();
@@ -27,46 +29,6 @@ function BlogDetail() {
     };
     fetchPost();
   }, [id]);
-
-  // Function to process content and handle images
-  const processContent = (content) => {
-    if (!content) return null;
-    
-    // If content already contains HTML, process it to ensure images have proper URLs
-    if (typeof content === 'string' && content.includes('<')) {
-      // Replace relative image URLs with absolute URLs
-      let processedContent = content.replace(
-        /<img([^>]*)\ssrc=["']([^"']*?)["']/g,
-        (match, beforeSrc, src) => {
-          // If src is already absolute, keep it as is
-          if (src.startsWith('http') || src.startsWith('//')) {
-            return match;
-          }
-          // If src is relative, make it absolute using the API base
-          const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-          const fullSrc = src.startsWith('/') ? `${baseUrl}${src}` : `${baseUrl}/${src}`;
-          return `<img${beforeSrc} src="${fullSrc}"`;
-        }
-      );
-      
-      // Ensure all images have proper styling for responsive display
-      processedContent = processedContent.replace(
-        /<img([^>]*?)(?:\sstyle=["'][^"']*["'])?([^>]*?)>/g,
-        '<img$1 style="max-width: 100%; height: auto; display: block; margin: 20px 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"$2>'
-      );
-      
-      return processedContent;
-    }
-    
-    // If content is a string without HTML, wrap it in paragraphs
-    if (typeof content === 'string') {
-      return content.split('\n').map(paragraph => 
-        paragraph.trim() ? `<p>${paragraph}</p>` : ''
-      ).join('');
-    }
-    
-    return content;
-  };
 
   // Function to render featured image if available
   const renderFeaturedImage = () => {
@@ -108,7 +70,7 @@ function BlogDetail() {
           overflow: "hidden",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
         }}>
-          <img 
+          <SafeImage 
             src={imageUrl}
             alt={imageAlt}
             style={{
@@ -117,9 +79,6 @@ function BlogDetail() {
               display: "block",
               maxHeight: "400px",
               objectFit: "cover"
-            }}
-            onError={(e) => {
-              e.target.style.display = 'none';
             }}
           />
         </div>
@@ -302,7 +261,7 @@ function BlogDetail() {
             color: "#333"
           }}>
             {(post.contentHtml || post.content) ? (
-              <div dangerouslySetInnerHTML={{ __html: processContent(post.contentHtml || post.content) }} />
+              <HtmlContent htmlContent={post.contentHtml || post.content} />
             ) : (
               <div style={{ color: "#666", fontStyle: "italic" }}>
                 No content available for this post.

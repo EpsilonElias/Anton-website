@@ -144,6 +144,7 @@ const BlogList = () => {
                   <img 
                     src={featuredImageUrl}
                     alt={post.title}
+                    crossOrigin="anonymous"
                     style={{
                       width: "100%",
                       height: "100%",
@@ -151,6 +152,7 @@ const BlogList = () => {
                       transition: "transform 0.2s ease"
                     }}
                     onError={(e) => {
+                      console.error('Blog list image failed to load:', e.target.src);
                       e.target.parentElement.style.display = 'none';
                     }}
                   />
