@@ -104,83 +104,117 @@ const BlogList = () => {
         gap: "30px",
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" 
       }}>
-        {posts.map((post, index) => (
-          <article
-            key={post.id || index}
-            style={{
-              backgroundColor: "white",
-              borderRadius: "12px",
-              padding: "24px",
-              boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-              border: "1px solid #e0e0e0",
-              transition: "transform 0.2s ease, box-shadow 0.2s ease",
-              cursor: "pointer"
-            }}
-            onClick={() => navigate(`/blogs/${post.id}`)}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "translateY(-4px)";
-              e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.15)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
-            }}
-          >
-            <h2 style={{
-              fontSize: "1.5rem",
-              marginBottom: "12px",
-              color: "#333",
-              lineHeight: "1.3"
-            }}>
-              {post.title}
-            </h2>
-            {post.excerpt && (
-              <p style={{
-                color: "#666",
-                marginBottom: "16px",
-                lineHeight: "1.6",
-                fontSize: "1rem"
-              }}>
-                {post.excerpt}
-              </p>
-            )}
-            {post.content && (
-              <div style={{
-                color: "#555",
-                lineHeight: "1.6",
-                marginBottom: "16px",
-                fontSize: "0.95rem"
-              }}>
-                <div dangerouslySetInnerHTML={{ 
-                  __html: post.content.substring(0, 200) + (post.content.length > 200 ? '...' : '')
-                }} />
+        {posts.map((post, index) => {
+          // Process featured image URL to ensure it's absolute
+          let featuredImageUrl = post.featuredImage;
+          if (featuredImageUrl && !featuredImageUrl.startsWith('http')) {
+            const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+            featuredImageUrl = featuredImageUrl.startsWith('/') ? `${baseUrl}${featuredImageUrl}` : `${baseUrl}/${featuredImageUrl}`;
+          }
+          
+          return (
+            <article
+              key={post.id || index}
+              style={{
+                backgroundColor: "white",
+                borderRadius: "12px",
+                overflow: "hidden",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                border: "1px solid #e0e0e0",
+                transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                cursor: "pointer"
+              }}
+              onClick={() => navigate(`/blogs/${post.id}`)}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = "translateY(-4px)";
+                e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.15)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
+              }}
+            >
+              {/* Featured Image */}
+              {featuredImageUrl && (
+                <div style={{
+                  width: "100%",
+                  height: "200px",
+                  overflow: "hidden"
+                }}>
+                  <img 
+                    src={featuredImageUrl}
+                    alt={post.title}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transition: "transform 0.2s ease"
+                    }}
+                    onError={(e) => {
+                      e.target.parentElement.style.display = 'none';
+                    }}
+                  />
+                </div>
+              )}
+              
+              <div style={{ padding: "24px" }}>
+                <h2 style={{
+                  fontSize: "1.5rem",
+                  marginBottom: "12px",
+                  color: "#333",
+                  lineHeight: "1.3"
+                }}>
+                  {post.title}
+                </h2>
+                {post.excerpt && (
+                  <p style={{
+                    color: "#666",
+                    marginBottom: "16px",
+                    lineHeight: "1.6",
+                    fontSize: "1rem"
+                  }}>
+                    {post.excerpt}
+                  </p>
+                )}
+                {post.content && (
+                  <div style={{
+                    color: "#555",
+                    lineHeight: "1.6",
+                    marginBottom: "16px",
+                    fontSize: "0.95rem"
+                  }}>
+                    <div dangerouslySetInnerHTML={{ 
+                      __html: post.content.substring(0, 200) + (post.content.length > 200 ? '...' : '')
+                    }} />
+                  </div>
+                )}
+                <div style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginTop: "16px",
+                  paddingTop: "16px",
+                  borderTop: "1px solid #e0e0e0"
+                }}>
+                  <small style={{ color: "#888" }}>
+                    {post.publishedDate ? 
+                      new Date(post.publishedDate).toLocaleDateString() : 
+                      post.date ? new Date(post.date).toLocaleDateString() : 
+                      'Recently published'
+                    }
+                  </small>
+                  <span style={{
+                    color: "rgb(244, 170, 149)",
+                    fontSize: "0.9rem",
+                    fontWeight: "500"
+                  }}>
+                    Read more →
+                  </span>
+                </div>
               </div>
-            )}
-            <div style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginTop: "16px",
-              paddingTop: "16px",
-              borderTop: "1px solid #e0e0e0"
-            }}>
-              <small style={{ color: "#888" }}>
-                {post.publishedDate ? 
-                  new Date(post.publishedDate).toLocaleDateString() : 
-                  post.date ? new Date(post.date).toLocaleDateString() : 
-                  'Recently published'
-                }
-              </small>
-              <span style={{
-                color: "rgb(244, 170, 149)",
-                fontSize: "0.9rem",
-                fontWeight: "500"
-              }}>
-                Read more →
-              </span>
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </div>
   );
