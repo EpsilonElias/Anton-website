@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Undo2 } from "lucide-react";
 import { API_BASE } from '../api';
 import SafeImage from '../components/SafeImage';
 import SimpleHtmlContent from '../components/SimpleHtmlContent';
@@ -197,31 +196,6 @@ function BlogDetail() {
         }}
       >
         {/* Back button in top left */}
-        <button
-          onClick={() => navigate(-1)}
-          style={{
-            position: "absolute",
-            top: 24,
-            left: 24,
-            background: "rgba(255,255,255,0.2)",
-            border: "none",
-            borderRadius: "50%",
-            padding: "12px",
-            cursor: "pointer",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-            zIndex: 10,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "background-color 0.2s ease"
-          }}
-          onMouseOver={(e) => e.target.style.background = "rgba(255,255,255,0.3)"}
-          onMouseOut={(e) => e.target.style.background = "rgba(255,255,255,0.2)"}
-          aria-label="Go back"
-        >
-          <Undo2 size={24} color="#fff" />
-        </button>
-
         <h1 style={{ 
           fontSize: "2.2rem", 
           marginBottom: "1rem",

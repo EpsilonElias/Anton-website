@@ -5,8 +5,8 @@
     "slug": "image-test",
     "excerpt": "this checks if the image shows",
     "publishedDate": "2025-08-22T22:22:25.748Z",
-    "featuredImage": "",
-    "contentHtml": "<img src=\"https://images.weserv.nl/?url=https%3A%2F%2Fdr-serzhans-psycare.onrender.com%2Fapi%2Fmedia%2Ffile%2Fforest.jpg&w=800&q=85\" alt=\"name-forest\" style=\"max-width: 100%; height: auto; display: block; margin: 20px 0;\" />"
+    "featuredImage": "https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg",
+    "contentHtml": "<img src=\"https://images.weserv.nl/?url=https%3A%2F%2Fdr-serzhans-psycare.onrender.com%2Fapi%2Fgridfs%2F68b12f60874e116ce5992ccc&w=800&q=85\" alt=\"book\" style=\"max-width: 100%; height: auto; display: block; margin: 20px 0;\" />"
   },
   {
     "id": "68a8db0a511e34d9c39d22f2",
