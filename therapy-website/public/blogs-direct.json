@@ -1,0 +1,87 @@
+[
+  {
+    "id": "68a8edd1df6eb82cc6541623",
+    "title": "image testing blog",
+    "slug": "image-test",
+    "excerpt": "this checks if the image shows",
+    "publishedDate": "2025-08-22T22:22:25.748Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "68a8db0a511e34d9c39d22f2",
+    "title": "Understanding Anxiety and How Therapy Can Help",
+    "slug": "understanding-anxiety",
+    "excerpt": "Anxiety",
+    "publishedDate": "2025-08-22T20:59:42.992Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "689c3d8b7315b9896cc0d982",
+    "title": "Trauma across a lifetime",
+    "slug": "Trauma-Across",
+    "excerpt": "More information here",
+    "publishedDate": "2025-08-13T07:21:45.848Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "689bc5c8c6a631d4d1de3c38",
+    "title": "Blog about therapy",
+    "slug": "blog-therapy-details",
+    "excerpt": "The details of therapy",
+    "publishedDate": "2025-08-12T22:51:16.584Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "689bbe3d4f4d1c435363fb0e",
+    "title": "this is a blog for a new age",
+    "slug": "new-age",
+    "excerpt": "this blog is to test the latest fixes I applied",
+    "publishedDate": "2025-08-12T22:19:21.761Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "6896f5e35ee7a25638b8293a",
+    "title": "Working Through Guilt",
+    "excerpt": "Guilt is one of the fundamental emotions we feel...",
+    "publishedDate": "2025-08-09T07:16:09.149Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "688d3e48b82a6af6aafb46cb",
+    "title": "a new age for blogs",
+    "excerpt": "something great has been acheived here",
+    "publishedDate": "2025-08-01T22:22:14.236Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "688596dae5ee4cb972631c87",
+    "title": "Autism",
+    "excerpt": "The difficulty with symptoms",
+    "publishedDate": "2025-07-27T03:01:43.140Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "688537b7ae674e6f9b02a9ae",
+    "title": "test blog 3",
+    "excerpt": "im trying to see what we can see on the deployed page",
+    "publishedDate": "2025-07-26T20:16:21.238Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  },
+  {
+    "id": "687ada473e5e39ea9ce907b5",
+    "title": "test blog 2",
+    "excerpt": "Now if you see this, it means that you see two blogs",
+    "publishedDate": "2025-07-18T23:35:10.264Z",
+    "featuredImage": "",
+    "contentHtml": ""
+  }
+]

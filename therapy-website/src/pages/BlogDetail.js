@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Undo2 } from "lucide-react";
 import { API_BASE } from '../api';
 import SafeImage from '../components/SafeImage';
-import HtmlContent from '../components/HtmlContent';
+import SimpleHtmlContent from '../components/SimpleHtmlContent';
 
 function BlogDetail() {
   const { id } = useParams();
@@ -264,7 +264,7 @@ function BlogDetail() {
             color: "#333"
           }}>
             {(post.contentHtml || post.content) ? (
-              <HtmlContent htmlContent={post.contentHtml || post.content} />
+              <SimpleHtmlContent htmlContent={post.contentHtml || post.content} />
             ) : (
               <div style={{ color: "#666", fontStyle: "italic" }}>
                 No content available for this post.

@@ -1,0 +1,11 @@
+[
+  {
+    "id": "68a8edd1df6eb82cc6541623",
+    "title": "image testing blog",
+    "slug": "image-test",
+    "excerpt": "this checks if the image shows",
+    "publishedDate": "2025-08-22T22:22:25.748Z",
+    "featuredImage": "",
+    "contentHtml": "<img src=\"https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg\" alt=\"name-forest\" style=\"max-width: 100%; height: auto; display: block; margin: 20px 0;\" />"
+  }
+]
