@@ -82,6 +82,46 @@ function Home() {
                   onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#f9f9f9"}
                   onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
                 >
+                  {/* Featured Image - using same logic as Blogs.js */}
+                  {(() => {
+                    // Process featured image URL to ensure it's absolute
+                    let featuredImageUrl = latestBlog.featuredImage;
+                    if (featuredImageUrl && !featuredImageUrl.startsWith('http')) {
+                      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+                      featuredImageUrl = featuredImageUrl.startsWith('/') ? `${baseUrl}${featuredImageUrl}` : `${baseUrl}/${featuredImageUrl}`;
+                    }
+                    
+                    // Use CORS proxy for featured images - exact same as Blogs.js
+                    if (featuredImageUrl) {
+                      featuredImageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(featuredImageUrl)}&w=400&h=200&fit=cover&q=85`;
+                    }
+                    
+                    return featuredImageUrl ? (
+                      <div style={{
+                        width: "100%",
+                        height: "160px",
+                        overflow: "hidden",
+                        borderRadius: "8px",
+                        marginBottom: "12px"
+                      }}>
+                        <img 
+                          src={featuredImageUrl}
+                          alt={latestBlog.title}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            transition: "transform 0.2s ease"
+                          }}
+                          onError={(e) => {
+                            console.error('Home page featured image failed to load:', e.target.src);
+                            e.target.parentElement.style.display = 'none';
+                          }}
+                        />
+                      </div>
+                    ) : null;
+                  })()}
+
                   <h4 style={{
                     marginBottom: "8px",
                     color: "#333",
