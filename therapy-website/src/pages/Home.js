@@ -64,7 +64,35 @@ function Home() {
 
           {/* Latest blogs section */}
           <div className="latest-blogs-container">
-            <h3>Latest Blog</h3>
+            <h3 style={{
+              textAlign: 'center',
+              textTransform: 'uppercase',
+              fontSize: '26px',
+              letterSpacing: '1px',
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              gridTemplateRows: '16px 0',
+              gridGap: '22px',
+              fontFamily: 'Quicksand, sans-serif',
+              fontWeight: '600',
+              color: '#333',
+              marginBottom: '20px',
+              position: 'relative'
+            }}>
+              <span style={{
+                content: ' ',
+                display: 'block',
+                borderBottom: '2px solid #ccc',
+                backgroundColor: '#f8f8f8'
+              }}></span>
+              Latest Blog
+              <span style={{
+                content: ' ',
+                display: 'block',
+                borderBottom: '2px solid #ccc',
+                backgroundColor: '#f8f8f8'
+              }}></span>
+            </h3>
             <div className="blog-placeholder">
               {loading ? (
                 <div style={{padding: "16px 0"}}>
@@ -73,14 +101,23 @@ function Home() {
               ) : latestBlog ? (
                 <div 
                   style={{
-                    padding: "16px 0",
+                    padding: "12px",
                     cursor: "pointer",
                     borderRadius: "8px",
-                    transition: "background-color 0.2s ease"
+                    transition: "all 0.2s ease",
+                    backgroundColor: "white",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    border: "1px solid #e0e0e0"
                   }}
                   onClick={() => navigate('/blogs')}
-                  onMouseOver={(e) => e.currentTarget.style.backgroundColor = "#f9f9f9"}
-                  onMouseOut={(e) => e.currentTarget.style.backgroundColor = "transparent"}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                    e.currentTarget.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.15)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
+                  }}
                 >
                   {/* Featured Image - using same logic as Blogs.js */}
                   {(() => {
