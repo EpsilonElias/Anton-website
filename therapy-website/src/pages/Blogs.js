@@ -34,15 +34,8 @@ const getValidImageUrl = async (post) => {
     return url;
   });
 
-  // Add fallback URLs
-  const fallbackUrls = [
-    'https://dr-serzhans-psycare.onrender.com/api/media/file/book.png',
-    'https://dr-serzhans-psycare.onrender.com/book.png',
-    'https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg',
-    'https://dr-serzhans-psycare.onrender.com/forest.jpg'
-  ];
-
-  const allUrls = [...processedUrls, ...fallbackUrls];
+  // Use only dynamic media from Payload CMS
+  const allUrls = processedUrls;
 
   for (const url of allUrls) {
     console.log('🔍 Validating blog list image URL:', url);

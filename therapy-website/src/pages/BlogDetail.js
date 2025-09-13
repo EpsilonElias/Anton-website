@@ -49,15 +49,21 @@ const getValidImageUrl = async (post) => {
     console.log('🔍 Processing image object:', imageObj);
     
     if (typeof imageObj === 'string') {
-      // If it's just a string (could be a URL or filename)
+      // Check if it's a Payload media ID (ObjectId format) vs filename
       if (imageObj.startsWith('http')) {
+        // It's already a full URL
         testUrls.push(imageObj);
-      } else {
-        // Assume it's a filename and construct the full URL
+      } else if (imageObj.match(/^[0-9a-f]{24}$/i)) {
+        // It's a Payload media ID (24 hex characters) - we need to fetch the actual media data
+        console.log('🔍 Found Payload media ID, need to fetch media data for:', imageObj);
+        // For now, skip IDs since we can't resolve them without API calls
+        // This indicates the blog generation script needs to be fixed to store full media objects
+      } else if (imageObj.includes('.')) {
+        // It looks like a filename, construct full URL
         testUrls.push(`https://dr-serzhans-psycare.onrender.com/api/media/file/${imageObj}`);
       }
     } else if (imageObj && typeof imageObj === 'object') {
-      // Handle Payload CMS image object structure
+      // Handle populated Payload CMS image object structure
       
       // First priority: use the main URL if it exists
       if (imageObj.url) {
@@ -89,17 +95,7 @@ const getValidImageUrl = async (post) => {
     }
   });
 
-  // Add some hardcoded test images based on what you showed me
-  const knownImages = [
-    'https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg',
-    'https://dr-serzhans-psycare.onrender.com/api/media/file/book.png',
-    'https://dr-serzhans-psycare.onrender.com/api/media/file/forest-400x300.jpg' // thumbnail version
-  ];
-  
-  testUrls.push(...knownImages);
-
-  // Add a reliable fallback
-  testUrls.push('https://via.placeholder.com/400x200/f4aa95/ffffff?text=Featured+Image');
+  // No hardcoded images - use only dynamic media from Payload CMS
 
   // Remove duplicates and test each URL
   const uniqueUrls = [...new Set(testUrls)];
@@ -117,7 +113,7 @@ const getValidImageUrl = async (post) => {
   }
   
   console.log('❌ No valid image URL found, using placeholder');
-  return 'https://via.placeholder.com/400x200/f4aa95/ffffff?text=No+Image+Found';
+  return null; // No fallback images - only use Payload CMS media
 };
 
 function BlogDetail() {
