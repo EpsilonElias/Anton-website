@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
-import SafeImage from '../components/SafeImage';
 import SimpleHtmlContent from '../components/SimpleHtmlContent';
 
 function BlogDetail() {
@@ -72,7 +71,7 @@ function BlogDetail() {
           overflow: "hidden",
           boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
         }}>
-          <SafeImage 
+          <img 
             src={proxiedImageUrl}
             alt={imageAlt}
             style={{
@@ -81,6 +80,10 @@ function BlogDetail() {
               display: "block",
               maxHeight: "400px",
               objectFit: "cover"
+            }}
+            onError={(e) => {
+              console.error('BlogDetail featured image failed to load:', e.target.src);
+              e.target.parentElement.style.display = 'none';
             }}
           />
         </div>
