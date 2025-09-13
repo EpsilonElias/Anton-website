@@ -3,10 +3,67 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
 
+// Helper function to validate image URLs before rendering to prevent OpaqueResponseBlocking
+const validateImageUrl = async (url) => {
+  try {
+    const response = await fetch(url, { 
+      method: 'HEAD',
+      mode: 'no-cors'
+    });
+    return response.type !== 'opaque' || response.ok;
+  } catch {
+    return false;
+  }
+};
+
+const getValidImageUrl = async (post) => {
+  const possibleUrls = [
+    post.featuredImage,
+    post.featuredImage?.url,
+    post.image?.url,
+    post.thumbnail?.url,
+    post.coverImage?.url,
+    post.heroImage?.url
+  ].filter(Boolean);
+
+  // Add absolute URL processing
+  const processedUrls = possibleUrls.map(url => {
+    if (url && !url.startsWith('http')) {
+      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+      return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+    }
+    return url;
+  });
+
+  // Add fallback URLs
+  const fallbackUrls = [
+    'https://dr-serzhans-psycare.onrender.com/api/media/file/book.png',
+    'https://dr-serzhans-psycare.onrender.com/book.png',
+    'https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg',
+    'https://dr-serzhans-psycare.onrender.com/forest.jpg'
+  ];
+
+  const allUrls = [...processedUrls, ...fallbackUrls];
+
+  for (const url of allUrls) {
+    console.log('🔍 Validating home page image URL:', url);
+    if (await validateImageUrl(url)) {
+      console.log('✅ Valid home page image URL found:', url);
+      return url;
+    } else {
+      console.log('❌ Invalid home page image URL:', url);
+    }
+  }
+  
+  console.log('❌ No valid home page image URL found');
+  return null;
+};
 
 function Home() {
   const [latestBlog, setLatestBlog] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [validImageUrl, setValidImageUrl] = useState(null);
+  const [imageLoading, setImageLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,12 +75,18 @@ function Home() {
         const posts = data.posts || data;
         if (Array.isArray(posts) && posts.length > 0) {
           setLatestBlog(posts[0]);
+          
+          // Validate image URL for the latest blog
+          console.log('🖼️ Starting image validation for home page...');
+          const validUrl = await getValidImageUrl(posts[0]);
+          setValidImageUrl(validUrl);
         }
       } catch (error) {
         console.error('Error fetching latest blog:', error);
         setLatestBlog(null);
       } finally {
         setLoading(false);
+        setImageLoading(false);
       }
     };
     fetchLatestBlog();
@@ -119,45 +182,46 @@ function Home() {
                     e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
                   }}
                 >
-                  {/* Featured Image - using same logic as Blogs.js */}
-                  {(() => {
-                    // Process featured image URL to ensure it's absolute
-                    let featuredImageUrl = latestBlog.featuredImage;
-                    if (featuredImageUrl && !featuredImageUrl.startsWith('http')) {
-                      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-                      featuredImageUrl = featuredImageUrl.startsWith('/') ? `${baseUrl}${featuredImageUrl}` : `${baseUrl}/${featuredImageUrl}`;
-                    }
-                    
-                    // Use CORS proxy for featured images - exact same as Blogs.js
-                    if (featuredImageUrl) {
-                      featuredImageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(featuredImageUrl)}&w=400&h=200&fit=cover&q=85`;
-                    }
-                    
-                    return featuredImageUrl ? (
-                      <div style={{
-                        width: "100%",
-                        height: "160px",
-                        overflow: "hidden",
-                        borderRadius: "8px",
-                        marginBottom: "12px"
-                      }}>
-                        <img 
-                          src={featuredImageUrl}
-                          alt={latestBlog.title}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            transition: "transform 0.2s ease"
-                          }}
-                          onError={(e) => {
-                            console.error('Home page featured image failed to load:', e.target.src);
-                            e.target.parentElement.style.display = 'none';
-                          }}
-                        />
-                      </div>
-                    ) : null;
-                  })()}
+                  {/* Featured Image with pre-validation to prevent OpaqueResponseBlocking */}
+                  {imageLoading ? (
+                    <div style={{
+                      width: "100%",
+                      height: "160px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "#f5f5f5",
+                      color: "#666",
+                      fontStyle: "italic",
+                      borderRadius: "8px",
+                      marginBottom: "12px"
+                    }}>
+                      Loading image...
+                    </div>
+                  ) : validImageUrl ? (
+                    <div style={{
+                      width: "100%",
+                      height: "160px",
+                      overflow: "hidden",
+                      borderRadius: "8px",
+                      marginBottom: "12px"
+                    }}>
+                      <img 
+                        src={validImageUrl}
+                        alt={latestBlog.title}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                          transition: "transform 0.2s ease"
+                        }}
+                        onError={(e) => {
+                          console.error('❌ Even validated home page image failed:', validImageUrl);
+                          e.target.parentElement.style.display = 'none';
+                        }}
+                      />
+                    </div>
+                  ) : null}
 
                   <h4 style={{
                     marginBottom: "8px",

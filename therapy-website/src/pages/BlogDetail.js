@@ -2,6 +2,64 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
 import SimpleHtmlContent from '../components/SimpleHtmlContent';
+import PayloadImage from '../components/PayloadImage';
+import { getImageURL } from '../lib/payloadImageHelpers';
+
+// Helper function to validate image URLs before rendering to prevent OpaqueResponseBlocking
+const validateImageUrl = async (url) => {
+  try {
+    const response = await fetch(url, { 
+      method: 'HEAD',
+      mode: 'no-cors'
+    });
+    return response.type !== 'opaque' || response.ok;
+  } catch {
+    return false;
+  }
+};
+
+const getValidImageUrl = async (post) => {
+  const possibleUrls = [
+    post.featuredImage,
+    post.featuredImage?.url,
+    post.image?.url,
+    post.thumbnail?.url,
+    post.coverImage?.url,
+    post.heroImage?.url
+  ].filter(Boolean);
+
+  // Add absolute URL processing
+  const processedUrls = possibleUrls.map(url => {
+    if (url && !url.startsWith('http')) {
+      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+      return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+    }
+    return url;
+  });
+
+  // Add fallback URLs
+  const fallbackUrls = [
+    'https://dr-serzhans-psycare.onrender.com/api/media/file/book.png',
+    'https://dr-serzhans-psycare.onrender.com/book.png',
+    'https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg',
+    'https://dr-serzhans-psycare.onrender.com/forest.jpg'
+  ];
+
+  const allUrls = [...processedUrls, ...fallbackUrls];
+
+  for (const url of allUrls) {
+    console.log('🔍 Validating image URL:', url);
+    if (await validateImageUrl(url)) {
+      console.log('✅ Valid image URL found:', url);
+      return url;
+    } else {
+      console.log('❌ Invalid image URL:', url);
+    }
+  }
+  
+  console.log('❌ No valid image URL found');
+  return null;
+};
 
 function BlogDetail() {
   const { id } = useParams();
@@ -9,6 +67,8 @@ function BlogDetail() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [validImageUrl, setValidImageUrl] = useState(null);
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -19,40 +79,43 @@ function BlogDetail() {
         const posts = data.posts || data;
         const found = Array.isArray(posts) ? posts.find(p => String(p.id) === String(id)) : null;
         setPost(found || null);
+        
+        // Validate image URL after setting post
+        if (found) {
+          console.log('🖼️ Starting image validation for post:', found.title);
+          const validUrl = await getValidImageUrl(found);
+          setValidImageUrl(validUrl);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
+        setImageLoading(false);
       }
     };
     fetchPost();
   }, [id]);
 
-  // Function to render featured image if available
+  // Function to render featured image with pre-validation to prevent OpaqueResponseBlocking
   const renderFeaturedImage = () => {
-    // Check for featured image from the cached blog data
-    let imageUrl = post.featuredImage;
-    
-    // Ensure the URL is absolute
-    if (imageUrl && !imageUrl.startsWith('http')) {
-      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-      imageUrl = imageUrl.startsWith('/') ? `${baseUrl}${imageUrl}` : `${baseUrl}/${imageUrl}`;
+    if (imageLoading) {
+      return (
+        <div style={{
+          marginBottom: "30px",
+          padding: "40px",
+          textAlign: "center",
+          color: "#666",
+          fontStyle: "italic"
+        }}>
+          Loading featured image...
+        </div>
+      );
     }
     
-    // Fallback to other possible image field names from Payload CMS
-    if (!imageUrl) {
-      imageUrl = post.image?.url || 
-                post.thumbnail?.url ||
-                post.coverImage?.url ||
-                post.heroImage?.url;
-                
-      // Ensure fallback URLs are also absolute
-      if (imageUrl && !imageUrl.startsWith('http')) {
-        const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-        imageUrl = imageUrl.startsWith('/') ? `${baseUrl}${imageUrl}` : `${baseUrl}/${imageUrl}`;
-      }
+    if (!validImageUrl) {
+      return null;
     }
-    
+
     const imageAlt = post.featuredImage?.alt || 
                     post.image?.alt || 
                     post.thumbnail?.alt ||
@@ -60,36 +123,30 @@ function BlogDetail() {
                     post.heroImage?.alt ||
                     post.title;
 
-    if (imageUrl) {
-      // Use a CORS proxy for the featured image to avoid CORS issues
-      const proxiedImageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(imageUrl)}&w=800&h=400&fit=cover&q=85`;
-      
-      return (
-        <div style={{
-          marginBottom: "30px",
-          borderRadius: "8px",
-          overflow: "hidden",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
-        }}>
-          <img 
-            src={proxiedImageUrl}
-            alt={imageAlt}
-            style={{
-              width: "100%",
-              height: "auto",
-              display: "block",
-              maxHeight: "400px",
-              objectFit: "cover"
-            }}
-            onError={(e) => {
-              console.error('BlogDetail featured image failed to load:', e.target.src);
-              e.target.parentElement.style.display = 'none';
-            }}
-          />
-        </div>
-      );
-    }
-    return null;
+    return (
+      <div style={{
+        marginBottom: "30px",
+        borderRadius: "8px",
+        overflow: "hidden",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)"
+      }}>
+        <img 
+          src={validImageUrl}
+          alt={imageAlt}
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+            maxHeight: "400px",
+            objectFit: "cover"
+          }}
+          onError={(e) => {
+            console.error('❌ Even validated image failed:', validImageUrl);
+            e.target.parentElement.style.display = 'none';
+          }}
+        />
+      </div>
+    );
   };
 
   // Function to render image gallery if available

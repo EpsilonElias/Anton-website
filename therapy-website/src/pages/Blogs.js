@@ -2,10 +2,68 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
 
+// Helper function to validate image URLs before rendering to prevent OpaqueResponseBlocking
+const validateImageUrl = async (url) => {
+  try {
+    const response = await fetch(url, { 
+      method: 'HEAD',
+      mode: 'no-cors'
+    });
+    return response.type !== 'opaque' || response.ok;
+  } catch {
+    return false;
+  }
+};
+
+const getValidImageUrl = async (post) => {
+  const possibleUrls = [
+    post.featuredImage,
+    post.featuredImage?.url,
+    post.image?.url,
+    post.thumbnail?.url,
+    post.coverImage?.url,
+    post.heroImage?.url
+  ].filter(Boolean);
+
+  // Add absolute URL processing
+  const processedUrls = possibleUrls.map(url => {
+    if (url && !url.startsWith('http')) {
+      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+      return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+    }
+    return url;
+  });
+
+  // Add fallback URLs
+  const fallbackUrls = [
+    'https://dr-serzhans-psycare.onrender.com/api/media/file/book.png',
+    'https://dr-serzhans-psycare.onrender.com/book.png',
+    'https://dr-serzhans-psycare.onrender.com/api/media/file/forest.jpg',
+    'https://dr-serzhans-psycare.onrender.com/forest.jpg'
+  ];
+
+  const allUrls = [...processedUrls, ...fallbackUrls];
+
+  for (const url of allUrls) {
+    console.log('🔍 Validating blog list image URL:', url);
+    if (await validateImageUrl(url)) {
+      console.log('✅ Valid blog list image URL found:', url);
+      return url;
+    } else {
+      console.log('❌ Invalid blog list image URL:', url);
+    }
+  }
+  
+  console.log('❌ No valid blog list image URL found');
+  return null;
+};
+
 const BlogList = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [validatedImages, setValidatedImages] = useState({});
+  const [imageLoading, setImageLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,12 +72,28 @@ const BlogList = () => {
         const response = await fetch(API_BASE);
         if (!response.ok) throw new Error('Failed to fetch blog data');
         const data = await response.json();
-        setPosts(data.posts || data); // Use 'posts' array or root array
+        const postsData = data.posts || data;
+        setPosts(postsData);
+        
+        // Validate images for all posts
+        console.log('🖼️ Starting image validation for blog list...');
+        const imageValidation = {};
+        
+        for (const post of postsData) {
+          if (post.id) {
+            const validUrl = await getValidImageUrl(post);
+            imageValidation[post.id] = validUrl;
+          }
+        }
+        
+        setValidatedImages(imageValidation);
         setLoading(false);
+        setImageLoading(false);
       } catch (error) {
         console.error('Error fetching posts:', error);
         setError(error.message);
         setLoading(false);
+        setImageLoading(false);
       }
     };
     fetchPosts();
@@ -105,17 +179,8 @@ const BlogList = () => {
         gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))" 
       }}>
         {posts.map((post, index) => {
-          // Process featured image URL to ensure it's absolute
-          let featuredImageUrl = post.featuredImage;
-          if (featuredImageUrl && !featuredImageUrl.startsWith('http')) {
-            const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-            featuredImageUrl = featuredImageUrl.startsWith('/') ? `${baseUrl}${featuredImageUrl}` : `${baseUrl}/${featuredImageUrl}`;
-          }
-          
-          // Use CORS proxy for featured images
-          if (featuredImageUrl) {
-            featuredImageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(featuredImageUrl)}&w=400&h=200&fit=cover&q=85`;
-          }
+          // Use pre-validated image URL to prevent OpaqueResponseBlocking
+          const validatedImageUrl = validatedImages[post.id];
           
           return (
             <article
@@ -139,15 +204,28 @@ const BlogList = () => {
                 e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.1)";
               }}
             >
-              {/* Featured Image */}
-              {featuredImageUrl && (
+              {/* Featured Image with pre-validation */}
+              {imageLoading ? (
+                <div style={{
+                  width: "100%",
+                  height: "200px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#f5f5f5",
+                  color: "#666",
+                  fontStyle: "italic"
+                }}>
+                  Loading image...
+                </div>
+              ) : validatedImageUrl ? (
                 <div style={{
                   width: "100%",
                   height: "200px",
                   overflow: "hidden"
                 }}>
                   <img 
-                    src={featuredImageUrl}
+                    src={validatedImageUrl}
                     alt={post.title}
                     style={{
                       width: "100%",
@@ -156,12 +234,12 @@ const BlogList = () => {
                       transition: "transform 0.2s ease"
                     }}
                     onError={(e) => {
-                      console.error('Blog list image failed to load:', e.target.src);
+                      console.error('❌ Even validated blog list image failed:', validatedImageUrl);
                       e.target.parentElement.style.display = 'none';
                     }}
                   />
                 </div>
-              )}
+              ) : null}
               
               <div style={{ padding: "24px" }}>
                 <h2 style={{
