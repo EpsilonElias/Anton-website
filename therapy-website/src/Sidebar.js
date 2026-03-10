@@ -50,7 +50,7 @@ function Sidebar() {
         {/* Social buttons */}
         <div className="sidebar-social-row">
           <a
-            href="https://www.instagram.com/psych.center2020/"
+            href="https://www.instagram.com/dr.anton_psycare/"
             target="_blank"
             rel="noopener noreferrer"
             className="sidebar-instagram"

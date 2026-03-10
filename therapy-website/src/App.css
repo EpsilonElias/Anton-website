@@ -477,11 +477,11 @@ html, body, #root, .App {
 }
 
 .text-section .block-text {
-  background: none;
-  padding: 0;
-  border-radius: 0;
-  box-shadow: none;
-  border: none;
+  background: rgb(244, 182, 149);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .text-section .block-text p {
@@ -606,9 +606,10 @@ html, body, #root, .App {
   .latest-blogs-container {
     height: auto !important;
     min-height: 280px !important;
-    width: min(85vw, 320px) !important;
+    width: calc(100vw - 30px) !important; /* Full width minus 15px on each side */
+    max-width: 320px !important;
     margin: 0 auto !important;
-    padding: 20px 16px !important;
+    padding: 15px !important; /* Reduced from 20px */
     box-sizing: border-box !important;
     display: flex !important;
     flex-direction: column !important;
@@ -616,10 +617,29 @@ html, body, #root, .App {
     text-align: center !important;
   }
   
+  .latest-blogs-container > div:first-child {
+    width: 100% !important;
+    margin: 0 0 30px 0 !important;
+    padding: 0 5px !important;
+  }
+  
+  .latest-blogs-container .blog-placeholder {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  
+  .latest-blogs-container .blog-placeholder > div {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
   .latest-blogs-container h3 {
     text-align: center !important;
     margin-bottom: 16px !important;
     font-size: 1.5rem !important;
+    margin-top: 20px !important; /* Pushes "LATEST BLOG" header down */
   }
  
   /* Bottom content - perfect centering */
@@ -642,6 +662,10 @@ html, body, #root, .App {
     text-align: center !important;
   }
   
+  .text-section .block-text {
+    padding: 20px !important;
+  }
+
   .text-section .block-text p {
     text-align: center !important;
     font-size: 1rem !important;
@@ -849,6 +873,31 @@ html, body, #root, .App {
   text-shadow:
     0 0 2px black,
     0 0 4px black;
+}
+
+.office-parallax-button {
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.office-parallax-button:focus {
+  outline: none;
+}
+
+.office-parallax-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+}
+
+.office-parallax-icon {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
 }
 
 .parallax-title-wrapper {
@@ -1219,6 +1268,7 @@ html, body, #root, .App {
   background: #fff;
   resize: none;
   font-family: inherit;
+  box-sizing: border-box;
 }
 
 .contact-form textarea {
@@ -1374,6 +1424,34 @@ html, body, #root, .App {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+}
+
+.resources-search-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.resources-search-input {
+  padding-right: 32px;
+}
+
+.resources-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.resources-search-clear:hover {
+  color: #222;
 }
 
 /* Mobile Styles @ max-width 700px */
@@ -1640,5 +1718,20 @@ html, body, #root, .App {
   .full-width-section {
     margin-top: 0 !important;
     padding-top: 48px 20px 24px 20px !important; /* Keep internal padding but remove top margin */
+  }
+}
+
+/* Latest Blog Title Animation */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:900");
+
+@keyframes slidingBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

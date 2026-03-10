@@ -15,39 +15,39 @@ const validateImageUrl = async (url) => {
   }
 };
 
-const getValidImageUrl = async (post) => {
-  const possibleUrls = [
-    post.featuredImage,
-    post.featuredImage?.url,
-    post.image?.url,
-    post.thumbnail?.url,
-    post.coverImage?.url,
-    post.heroImage?.url
-  ].filter(Boolean);
-
-  // Add absolute URL processing
-  const processedUrls = possibleUrls.map(url => {
-    if (url && !url.startsWith('http')) {
-      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-      return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+const getValidImageUrl = (post) => {
+  console.log('🔍 Getting image URL for post:', post.title);
+  
+  // Check if featuredImage is a string URL
+  if (typeof post.featuredImage === 'string' && post.featuredImage) {
+    // If it starts with http, use it directly
+    if (post.featuredImage.startsWith('http')) {
+      console.log('✅ Using featuredImage URL:', post.featuredImage);
+      return post.featuredImage;
     }
-    return url;
-  });
-
-  // Use only dynamic media from Payload CMS
-  const allUrls = processedUrls;
-
-  for (const url of allUrls) {
-    console.log('🔍 Validating blog list image URL:', url);
-    if (await validateImageUrl(url)) {
-      console.log('✅ Valid blog list image URL found:', url);
-      return url;
-    } else {
-      console.log('❌ Invalid blog list image URL:', url);
-    }
+    // If it's a relative path, construct full URL
+    const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+    const fullUrl = post.featuredImage.startsWith('/') 
+      ? `${baseUrl}${post.featuredImage}` 
+      : `${baseUrl}/api/media/file/${post.featuredImage}`;
+    console.log('✅ Constructed URL from string:', fullUrl);
+    return fullUrl;
   }
   
-  console.log('❌ No valid blog list image URL found');
+  // Check if featuredImage is an object with URL property
+  if (post.featuredImage?.url) {
+    console.log('✅ Using featuredImage.url:', post.featuredImage.url);
+    return post.featuredImage.url;
+  }
+  
+  // Check other possible image fields
+  const otherImageUrl = post.image?.url || post.thumbnail?.url || post.coverImage?.url || post.heroImage?.url;
+  if (otherImageUrl) {
+    console.log('✅ Using alternative image URL:', otherImageUrl);
+    return otherImageUrl;
+  }
+  
+  console.log('❌ No image URL found for post:', post.title);
   return null;
 };
 
@@ -68,13 +68,13 @@ const BlogList = () => {
         const postsData = data.posts || data;
         setPosts(postsData);
         
-        // Validate images for all posts
-        console.log('🖼️ Starting image validation for blog list...');
+        // Get image URLs for all posts (no async validation needed)
+        console.log('🖼️ Getting image URLs for blog list...');
         const imageValidation = {};
         
         for (const post of postsData) {
           if (post.id) {
-            const validUrl = await getValidImageUrl(post);
+            const validUrl = getValidImageUrl(post);
             imageValidation[post.id] = validUrl;
           }
         }

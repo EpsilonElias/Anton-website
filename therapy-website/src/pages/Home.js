@@ -1,5 +1,6 @@
 import face from '../face.jpg';
 import React, { useState, useEffect } from "react";
+import { ContactRound, File } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
 
@@ -16,39 +17,39 @@ const validateImageUrl = async (url) => {
   }
 };
 
-const getValidImageUrl = async (post) => {
-  const possibleUrls = [
-    post.featuredImage,
-    post.featuredImage?.url,
-    post.image?.url,
-    post.thumbnail?.url,
-    post.coverImage?.url,
-    post.heroImage?.url
-  ].filter(Boolean);
-
-  // Add absolute URL processing
-  const processedUrls = possibleUrls.map(url => {
-    if (url && !url.startsWith('http')) {
-      const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
-      return url.startsWith('/') ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
+const getValidImageUrl = (post) => {
+  console.log('🔍 Getting image URL for home page post:', post.title);
+  
+  // Check if featuredImage is a string URL
+  if (typeof post.featuredImage === 'string' && post.featuredImage) {
+    // If it starts with http, use it directly
+    if (post.featuredImage.startsWith('http')) {
+      console.log('✅ Using featuredImage URL:', post.featuredImage);
+      return post.featuredImage;
     }
-    return url;
-  });
-
-  // Use only dynamic media from Payload CMS
-  const allUrls = processedUrls;
-
-  for (const url of allUrls) {
-    console.log('🔍 Validating home page image URL:', url);
-    if (await validateImageUrl(url)) {
-      console.log('✅ Valid home page image URL found:', url);
-      return url;
-    } else {
-      console.log('❌ Invalid home page image URL:', url);
-    }
+    // If it's a relative path, construct full URL
+    const baseUrl = 'https://dr-serzhans-psycare.onrender.com';
+    const fullUrl = post.featuredImage.startsWith('/') 
+      ? `${baseUrl}${post.featuredImage}` 
+      : `${baseUrl}/api/media/file/${post.featuredImage}`;
+    console.log('✅ Constructed URL from string:', fullUrl);
+    return fullUrl;
   }
   
-  console.log('❌ No valid home page image URL found');
+  // Check if featuredImage is an object with URL property
+  if (post.featuredImage?.url) {
+    console.log('✅ Using featuredImage.url:', post.featuredImage.url);
+    return post.featuredImage.url;
+  }
+  
+  // Check other possible image fields
+  const otherImageUrl = post.image?.url || post.thumbnail?.url || post.coverImage?.url || post.heroImage?.url;
+  if (otherImageUrl) {
+    console.log('✅ Using alternative image URL:', otherImageUrl);
+    return otherImageUrl;
+  }
+  
+  console.log('❌ No image URL found for home page post:', post.title);
   return null;
 };
 
@@ -69,9 +70,9 @@ function Home() {
         if (Array.isArray(posts) && posts.length > 0) {
           setLatestBlog(posts[0]);
           
-          // Validate image URL for the latest blog
-          console.log('🖼️ Starting image validation for home page...');
-          const validUrl = await getValidImageUrl(posts[0]);
+          // Get image URL for the latest blog
+          console.log('🖼️ Getting image URL for home page...');
+          const validUrl = getValidImageUrl(posts[0]);
           setValidImageUrl(validUrl);
         }
       } catch (error) {
@@ -99,7 +100,7 @@ function Home() {
       >
         <div className="parallax-title-wrapper">
           <h1 className="parallax-title">Dr. Serzhan Psycare</h1>
-          <div className="parallax-subtitle">Tikkun HaMoach</div>
+          <div className="parallax-subtitle"><em>Tikkun HaMoach</em></div>
         </div>
       </div>
 
@@ -120,35 +121,54 @@ function Home() {
 
           {/* Latest blogs section */}
           <div className="latest-blogs-container">
-            <h3 style={{
+            <div style={{
+              animation: 'slidingBackground 50s linear infinite',
+              background: 'linear-gradient(to bottom, rgb(244, 170, 149), rgb(244, 175, 149), rgb(246, 180, 149), rgb(246, 185, 149))',
+              height: '70px',
               textAlign: 'center',
-              textTransform: 'uppercase',
-              fontSize: '26px',
-              letterSpacing: '1px',
               display: 'grid',
               gridTemplateColumns: '1fr auto 1fr',
-              gridTemplateRows: '16px 0',
-              gridGap: '22px',
-              fontFamily: 'Quicksand, sans-serif',
-              fontWeight: '600',
-              color: '#333',
-              marginBottom: '20px',
-              position: 'relative'
+              alignItems: 'center',
+              gap: '20px',
+              marginBottom: '30px',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              position: 'relative',
+              backgroundSize: '200% 200%',
+              padding: '0 20px',
+              margin: '0 0 30px 0'
             }}>
               <span style={{
-                content: ' ',
-                display: 'block',
-                borderBottom: '2px solid #ccc',
-                backgroundColor: '#f8f8f8'
+                borderBottom: '2px solid white',
+                display: 'block'
               }}></span>
-              Latest Blog
+              
+              <h3 
+                style={{
+                  color: 'white',
+                  fontFamily: "'Quicksand', sans-serif",
+                  fontSize: '26px',
+                  letterSpacing: '2px',
+                  margin: '0',
+                  textTransform: 'uppercase',
+                  textShadow: `
+                    2px 2px 4px rgba(0,0,0,0.3),
+                    4px 4px 6px rgba(0,0,0,0.2),
+                    6px 6px 8px rgba(0,0,0,0.1)
+                  `,
+                  fontWeight: '700',
+                  position: 'relative',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                LATEST BLOG
+              </h3>
+              
               <span style={{
-                content: ' ',
-                display: 'block',
-                borderBottom: '2px solid #ccc',
-                backgroundColor: '#f8f8f8'
+                borderBottom: '2px solid white',
+                display: 'block'
               }}></span>
-            </h3>
+            </div>
             <div className="blog-placeholder">
               {loading ? (
                 <div style={{padding: "16px 0"}}>
@@ -157,13 +177,15 @@ function Home() {
               ) : latestBlog ? (
                 <div 
                   style={{
-                    padding: "12px",
+                    padding: "8px",
                     cursor: "pointer",
                     borderRadius: "8px",
                     transition: "all 0.2s ease",
                     backgroundColor: "white",
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-                    border: "1px solid #e0e0e0"
+                    border: "1px solid #e0e0e0",
+                    width: "100%",
+                    boxSizing: "border-box"
                   }}
                   onClick={() => navigate('/blogs')}
                   onMouseOver={(e) => {
@@ -321,18 +343,100 @@ function Home() {
         <div className="bottom-content">
           <div className="text-section">
             <div className="block-text">
-              <p>How have you been feeling lately? If you have been feeling like something is not right, or that it is time you addressed something that has bothered you for a while, then perhaps we should talk. Whether it trauma, difficulty with mood, low self-esteem, attention, interpersonal conflicts, maladaptive habits, pain management, personality disorders you are always welcomed in.</p>
+              <p>How have you been feeling lately?</p>
+              <p>If something feels off — or if there's something you've been carrying for a while and you're finally ready to talk about it — you're in the right place.</p>
+              <p>Whether you're navigating anxiety, depression, trauma, low self-esteem, relationship challenges, or simply trying to understand yourself better, you are always welcome here. No judgment. Just a space that's yours.</p>
               <p>_______________________</p>
               <p>Begin your recovery by understanding your mental health using different therapy styles. Book a session now!</p>
             </div>
           </div>
 
-          {/* Therapy activity box */}
+          {/* YouTube channel box */}
           <div className="activity-box">
-            <p>Would you like to do a therapy activity?</p>
-            <button className="activity-button">
-              Explore Activities
-            </button>
+            <div style={{
+              animation: 'slidingBackground 50s linear infinite',
+              background: 'white',
+              height: '70px',
+              textAlign: 'center',
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              alignItems: 'center',
+              gap: '20px',
+              marginBottom: '30px',
+              borderRadius: '8px',
+              overflow: 'hidden',
+              position: 'relative',
+              backgroundSize: '200% 200%',
+              padding: '0 20px',
+              margin: '0 0 30px 0',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+            }}>
+              <span style={{
+                borderBottom: '2px solid rgb(244, 170, 149)',
+                display: 'block'
+              }}></span>
+              
+              <h3 
+                style={{
+                  color: 'rgb(244, 170, 149)',
+                  fontFamily: "'Quicksand', sans-serif",
+                  fontSize: '26px',
+                  letterSpacing: '2px',
+                  margin: '0',
+                  textTransform: 'uppercase',
+                  textShadow: `
+                    1px 1px 2px rgba(244, 170, 149, 0.3),
+                    2px 2px 4px rgba(244, 170, 149, 0.2)
+                  `,
+                  fontWeight: '700',
+                  position: 'relative',
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                Latest video 
+              </h3>
+              
+              <span style={{
+                borderBottom: '2px solid rgb(244, 170, 149)',
+                display: 'block'
+              }}></span>
+            </div>
+            <div style={{
+              position: 'relative',
+              paddingBottom: '56.25%', // 16:9 aspect ratio
+              height: 0,
+              overflow: 'hidden',
+              maxWidth: '100%',
+              marginBottom: '20px',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)'
+            }}>
+              <iframe
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '8px'
+                }}
+                src="https://www.youtube.com/embed?listType=user_uploads&list=Mentifex-q1y"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <a 
+              href="https://www.youtube.com/@Mentifex-q1y" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ textDecoration: 'none' }}
+            >
+              <button className="activity-button">
+                Click here for our YouTube!
+              </button>
+            </a>
           </div>
         </div>
       </div>
@@ -351,9 +455,13 @@ function Home() {
           height: "750px",
         }}
       >
-        <div className="office-parallax-text">
-          Learn more about me in the " About " section
-        </div>
+        <button
+          className="office-parallax-text office-parallax-button"
+          onClick={() => navigate('/resources')}
+        >
+          <File className="office-parallax-icon" />
+          Download our resources!
+        </button>
       </div>
 
       {/* Another parallax section with a different image */}
@@ -367,9 +475,13 @@ function Home() {
           height: "750px",
         }}
       >
-        <div className="office-parallax-text">
-          Contact me to book a session
-        </div>
+        <button
+          className="office-parallax-text office-parallax-button"
+          onClick={() => navigate('/contact')}
+        >
+          <ContactRound className="office-parallax-icon" />
+          Book a session now!
+        </button>
       </div>
 
       {/* Solid gradient section with text */}

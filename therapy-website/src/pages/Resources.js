@@ -97,14 +97,23 @@ function Resources() {
   const [results, setResults] = useState([]);
   const [fadeIn, setFadeIn] = useState(false);
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setFadeIn(false); // Reset fade before showing new results
-    const filtered = resources.filter(res =>
-      res.name.toLowerCase().includes(query.trim().toLowerCase())
+  const updateResults = (nextQuery) => {
+    const trimmed = nextQuery.trim().toLowerCase();
+    setFadeIn(false);
+    if (trimmed === "") {
+      setResults([]);
+      return;
+    }
+    const filtered = resources.filter((res) =>
+      res.name.toLowerCase().includes(trimmed)
     );
     setResults(filtered);
-    setTimeout(() => setFadeIn(true), 10); // Trigger fade after DOM update
+    setTimeout(() => setFadeIn(true), 10);
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    updateResults(query);
   };
 
   const displayList = query === "" ? [] : results;
@@ -113,7 +122,9 @@ function Resources() {
     <div className="resources-page">
       <div className="full-width-section therapy-header-section">
         <h2>Resources</h2>
-        <p>Download helpful therapy guides and worksheets instantly.</p>
+        <p className="therapy-header-desc">
+          Download helpful therapy guides and worksheets instantly.
+        </p>
       </div>
       
       <form
@@ -121,13 +132,36 @@ function Resources() {
         className="resources-search-form"
         style={{ display: "flex", justifyContent: "center", gap: "12px", margin: "24px 0" }}
       >
-        <input
-          type="text"
-          placeholder="Search for a resource..."
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          style={{ padding: "10px", width: "250px" }}
-        />
+        <div className="resources-search-input-wrapper">
+          <input
+            type="text"
+            placeholder="Search for a resource..."
+            value={query}
+            onChange={(e) => {
+              const nextQuery = e.target.value;
+              setQuery(nextQuery);
+              updateResults(nextQuery);
+            }}
+            autoCorrect="on"
+            autoCapitalize="sentences"
+            spellCheck
+            className="resources-search-input"
+            style={{ padding: "10px", width: "250px" }}
+          />
+          {query !== "" && (
+            <button
+              type="button"
+              className="resources-search-clear"
+              aria-label="Clear search"
+              onClick={() => {
+                setQuery("");
+                updateResults("");
+              }}
+            >
+              ×
+            </button>
+          )}
+        </div>
         <button type="submit" className="resource-search-btn">
           <FileSearch2 size={25} />
         </button>
