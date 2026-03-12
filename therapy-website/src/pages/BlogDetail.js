@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
 import SimpleHtmlContent from '../components/SimpleHtmlContent';
-import PayloadImage from '../components/PayloadImage';
-import { getImageURL } from '../lib/payloadImageHelpers';
 
 // FIXED: Helper function to validate image URLs without causing OpaqueResponseBlocking
 const validateImageUrl = async (url) => {

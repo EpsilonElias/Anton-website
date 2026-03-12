@@ -2,19 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_BASE } from '../api';
 
-// Helper function to validate image URLs before rendering to prevent OpaqueResponseBlocking
-const validateImageUrl = async (url) => {
-  try {
-    const response = await fetch(url, { 
-      method: 'HEAD',
-      mode: 'no-cors'
-    });
-    return response.type !== 'opaque' || response.ok;
-  } catch {
-    return false;
-  }
-};
-
 const getValidImageUrl = (post) => {
   console.log('🔍 Getting image URL for post:', post.title);
   
