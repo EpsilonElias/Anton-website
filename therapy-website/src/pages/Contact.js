@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import emailjs from "emailjs-com";
 
 function Contact() {
   const [form, setForm] = useState({
@@ -29,12 +28,58 @@ function Contact() {
     return () => clearTimeout(timerRef.current);
   }, [timer]);
 
+  useEffect(() => {
+    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+    if (!siteKey || typeof window === "undefined") {
+      return;
+    }
+
+    if (document.querySelector('script[data-recaptcha="v3"]')) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
+    script.async = true;
+    script.defer = true;
+    script.setAttribute("data-recaptcha", "v3");
+    document.body.appendChild(script);
+  }, []);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const getRecaptchaToken = (siteKey) =>
+    new Promise((resolve, reject) => {
+      if (!window.grecaptcha || !window.grecaptcha.execute) {
+        reject(new Error("reCAPTCHA not ready"));
+        return;
+      }
+
+      window.grecaptcha.ready(() => {
+        window.grecaptcha
+          .execute(siteKey, { action: "contact_submit" })
+          .then(resolve)
+          .catch(reject);
+      });
+    });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const apiUrl = process.env.REACT_APP_CONTACT_API_URL;
+    const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+
+    if (!apiUrl) {
+      alert("Contact form is not configured.");
+      return;
+    }
+
+    if (!siteKey) {
+      alert("reCAPTCHA site key is missing.");
+      return;
+    }
 
     if (form.honeypot !== "") {
       alert("Bot detected, submission blocked.");
@@ -46,48 +91,59 @@ function Contact() {
       return;
     }
 
-    emailjs.send(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-      {
-        first_name: form.firstName,
-        last_name: form.lastName,
-        email: form.email,
-        phone: form.phone,
-        subject: form.subject,
-        message: form.message,
-        time: new Date().toLocaleString(),
-      },
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-    )
-      .then(
-        () => {
-          setShowModal(true);
-          setForm({
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            subject: "",
-            message: "",
-            honeypot: "",
-          });
-          //setTimer(60); // Reset timer to 30 seconds
-        },
-        (error) => {
-          // Check for EmailJS limit error
-          if (
-            error?.text?.toLowerCase().includes("limit") ||
-            error?.text?.toLowerCase().includes("quota") ||
-            error?.text?.toLowerCase().includes("reached")
-          ) {
-            setShowLimitModal(true);
-          } else {
-            alert("There was an error sending your message.");
-            console.error(error);
-          }
-        }
-      );
+    try {
+      const recaptchaToken = await getRecaptchaToken(siteKey);
+      const endpoint = `${apiUrl.replace(/\/$/, "")}/contact`;
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: form.firstName,
+          lastName: form.lastName,
+          email: form.email,
+          phone: form.phone,
+          subject: form.subject,
+          message: form.message,
+          honeypot: form.honeypot,
+          recaptchaToken,
+        }),
+      });
+
+      if (response.ok) {
+        setShowModal(true);
+        setForm({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+          honeypot: "",
+        });
+        return;
+      }
+
+      if (response.status === 429) {
+        setShowLimitModal(true);
+        return;
+      }
+
+      const errorText = await response.text();
+      if (
+        errorText.toLowerCase().includes("limit") ||
+        errorText.toLowerCase().includes("quota") ||
+        errorText.toLowerCase().includes("reached")
+      ) {
+        setShowLimitModal(true);
+      } else {
+        alert("There was an error sending your message.");
+        console.error(errorText);
+      }
+    } catch (error) {
+      alert("There was an error sending your message.");
+      console.error(error);
+    }
   };
 
   return (

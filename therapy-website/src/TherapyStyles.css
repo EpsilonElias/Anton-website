@@ -83,6 +83,100 @@
   padding-top: 24px; 
 }
 
+.carousel3d-expanded-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.carousel3d-card.expanded {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: min(1100px, 90vw);
+  height: auto;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: 0;
+  transform: none;
+  opacity: 1;
+  z-index: 2001;
+  padding: 32px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.carousel3d-card.expanded h3 {
+  text-align: center;
+  width: 100%;
+}
+
+.carousel3d-expanded-heading {
+  margin: 16px 0 8px 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.carousel3d-expanded-paragraph {
+  margin: 10px 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.carousel3d-expanded-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-start;
+  margin: 8px 0 12px 0;
+}
+
+.carousel3d-expanded-image {
+  width: 320px;
+  max-width: 45%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  flex-shrink: 0;
+}
+
+.carousel3d-expanded-text {
+  flex: 1 1 320px;
+  min-width: 280px;
+}
+
+.carousel3d-expanded-list {
+  margin: 8px 0 12px 18px;
+  padding: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.carousel3d-minimize {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.carousel3d-minimize:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
 
 
 .carousel-arrow {

@@ -1,4 +1,5 @@
 import face from '../face.jpg';
+import symbolLogo from '../Symbol.jpg';
 import React, { useState, useEffect } from "react";
 import { ContactRound, File } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
@@ -100,7 +101,14 @@ function Home() {
       >
         <div className="parallax-title-wrapper">
           <h1 className="parallax-title">Dr. Serzhan Psycare</h1>
-          <div className="parallax-subtitle"><em>Tikkun HaMoach</em></div>
+          <div className="parallax-subtitle-group">
+            <div className="parallax-subtitle"><em>Tikkun HaMoach</em></div>
+            <img
+              src={symbolLogo}
+              alt="Tikkun HaMoach symbol"
+              className="parallax-subtitle-logo"
+            />
+          </div>
         </div>
       </div>
 

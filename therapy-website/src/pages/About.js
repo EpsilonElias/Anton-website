@@ -31,17 +31,21 @@ function About() {
       <div className="about-container">
         {/* Square 1: Background */}
         <section className="about-square">
-          <div className="about-square-content">
-            <img src={profileImg} alt="Dr. Anton Serzhan" className="about-square-image" />
-            <div className="about-square-text">
+          <div className="about-square-content about-hero-grid">
+            <div className="about-hero-image">
+              <img src={profileImg} alt="Dr. Anton Serzhan" className="about-hero-img" />
+            </div>
+            <div className="about-hero-text">
               <h3>Dr. Serzhan</h3>
               <h2>Clinical Psychologist</h2>
               <p>
-                I am Dr. Anton Serzhan, Psy.D (Dr. Anton) and I am a Licensed Clinical Psychologist. For years I have been working with a variety of different populations, including the veterans, LGBTQ+, injury recovery and chronic pain patients; adults of every age group, both for individual sessions and as couples. I specialize in the application of evidence-based Cognitive Behavioral Therapy (CBT), Dialectical Behavioral Therapy (DBT), Motivational Interviewing (MI),  Assertive Communication Skills (ACS), Insight Oriented Therapy (IOT), Problem-Solving Therapy (PST), Guided Breathing, Validation Therapy (VT), Acceptance and Commitment Therapy (ACT). I am here to be your guide, your resource and your support.
+                I am Dr. Anton Serzhan, Psy.D (Dr. Anton) and I am a Licensed Clinical Psychologist. For years I have been working with a variety of different populations, including the veterans, LGBTQ+, injury recovery and chronic pain patients; adults of every age group, both for individual sessions and as couples. I specialize in the application of evidence-based Cognitive Behavioral Therapy (CBT), Dialectical Behavioral Therapy (DBT), Motivational Interviewing (MI), Assertive Communication Skills (ACS), Insight Oriented Therapy (IOT), Problem-Solving Therapy (PST), Guided Breathing, Validation Therapy (VT), Acceptance and Commitment Therapy (ACT). I am here to be your guide, your resource and your support.
               </p>
               <p>
                 Over the years, Anton has worked with diverse populations, always focusing on empathy and evidence-based care.
               </p>
+            </div>
+            <div className="about-hero-body">
               <p>
                 With years of experience, Dr. Anton specializes in a variety of therapy styles tailored to each individual's needs.
               </p>
@@ -54,9 +58,11 @@ function About() {
 
         {/* Square 2: Experience */}
         <section className="about-square">
-          <div className="about-square-content reverse">
-            <img src={profileImg2} alt="Therapy Session" className="about-square-image" />
-            <div className="about-square-text">
+          <div className="about-square-content about-hero-grid about-hero-grid--reverse">
+            <div className="about-hero-image about-hero-image--right">
+              <img src={profileImg2} alt="Therapy Session" className="about-hero-img" />
+            </div>
+            <div className="about-hero-text">
               <h3>Elias</h3>
               <h2>Full Stack Web Developer/ Software Engineer</h2>
               <p>

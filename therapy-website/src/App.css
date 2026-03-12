@@ -182,6 +182,54 @@ html, body, #root, .App {
   transition: padding-left 0.3s;
 }
 
+.route-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(2px);
+  z-index: 50;
+}
+
+.route-loader::before {
+  content: '';
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.route-loader__ball {
+  position: relative;
+  width: 84px;
+  height: 84px;
+  animation: routeLoaderSpin 1.1s linear infinite;
+}
+
+.route-loader__ball-wrap {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+@keyframes routeLoaderSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Optional: Add left padding so content isn't hidden under the sidebar */
 @media (min-width: 601px) {
   .parallax-title,
@@ -925,6 +973,24 @@ html, body, #root, .App {
   margin-top: 0;
 }
 
+.parallax-subtitle-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+
+.parallax-subtitle-logo {
+  width: 50%;
+  max-width: 220px;
+  min-width: 120px;
+  height: auto;
+  margin-top: 12px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
 
 
 /* Parallax Responsive Adjustments */
@@ -964,6 +1030,11 @@ html, body, #root, .App {
   }
   .parallax-subtitle {
     font-size: 1.5rem;
+  }
+
+  .parallax-subtitle-logo {
+    min-width: 90px;
+    margin-top: 10px;
   }
 }
 
@@ -1114,6 +1185,58 @@ html, body, #root, .App {
   height: 100%;
 }
 
+.about-hero-grid {
+  display: block;
+}
+
+.about-hero-image {
+  float: left;
+  margin: 0 36px 16px 0;
+  display: block;
+}
+
+.about-hero-grid--reverse .about-hero-image {
+  float: right;
+  margin: 0 0 16px 36px;
+}
+
+.about-hero-img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.about-hero-text,
+.about-hero-body {
+  display: block;
+}
+
+.about-hero-text h2,
+.about-hero-text h3,
+.about-hero-text p,
+.about-hero-body p {
+  font-family: 'Quicksand', sans-serif;
+  color: #333;
+}
+
+.about-hero-text h3 {
+  font-size: 2.7rem;
+  color: rgb(244, 170, 149);
+}
+
+.about-hero-text p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.about-hero-body p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
 .about-square-content.reverse {
   flex-direction: row-reverse;
 }
@@ -1198,6 +1321,39 @@ html, body, #root, .App {
     flex-direction: column !important; /* Stack vertically */
     gap: 16px !important;
     align-items: center !important; /* Center everything */
+  }
+
+  .about-hero-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: center !important;
+  }
+
+  .about-hero-image {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    float: none !important;
+    margin: 0 auto 16px auto !important;
+  }
+
+  .about-hero-grid--reverse .about-hero-image {
+    float: none !important;
+    margin: 0 auto 16px auto !important;
+  }
+
+  .about-hero-img {
+    width: min(80vw, 280px) !important;
+    height: 350px !important;
+    object-fit: cover !important;
+    border-radius: 12px !important;
+  }
+
+  .about-hero-text,
+  .about-hero-body {
+    text-align: center !important;
+    width: 100% !important;
   }
   
   .about-square-image {
